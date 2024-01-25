@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
-import App from './App'
+import Admin from '.'
 
 it("App component renders with hello world text", () => {
-  render(<App/>)
+  render(<Admin/>)
   expect(screen.getByText(/Hello World/i)).toBeInTheDocument()
 })

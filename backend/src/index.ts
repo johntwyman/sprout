@@ -8,7 +8,7 @@ const app: Express = express();
 
 const PORT: string | number = process.env.PORT || 4000;
 
-app.use(cors());
+app.use([express.json(), cors()]);
 app.use(pledgeRoutes);
 
 const uri: string = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@${process.env.MONGODB_HOST}/${process.env.MONGODB_DB}?retryWrites=true&w=majority`;

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import PledgeItem from './components/PledgeItem';
-import AddPledge from './components/AddPledge';
-import { getPledges, addPledge, deletePledge } from './api';
+import PledgeItem from '../../components/PledgeItem';
+import AddPledge from '../../components/AddPledge';
+import { getPledges, addPledge, deletePledge } from '../../api/pledges';
 
-const App: React.FC = () => {
+const Scratch: React.FC = () => {
   const [pledges, setPledges] = useState<IPledge[]>([]);
 
   useEffect(() => {
@@ -27,25 +27,15 @@ const handleSavePledge = (e: React.FormEvent, formData: IPledge): void => {
   .catch((err) => console.log(err))
 }
 
-// const handleUpdatePledge = (pledge: IPledge): void => {
-//   updatePledge(pledge).then(({ status, data }) => {
-//       if (status !== 200) {
-//         throw new Error('Error! Pledge not updated')
-//       }
-//       setPledges(data.pledges)
-//     })
-//     .catch((error) => console.log("Error! Pledge not updated"))
-// }
-
-  const handleDeletePledge = (_id: string): void => {
-    deletePledge(_id).then(({ status, data }) => {
-        if (status !== 200) {
-          throw new Error('Error! Pledge not deleted')
-        }
-        setPledges(data.pledges)
-      })
-      .catch((error) => console.log("Error! Pledge not deleted"))
-  }
+const handleDeletePledge = (_id: string): void => {
+  deletePledge(_id).then(({ status, data }) => {
+      if (status !== 200) {
+        throw new Error('Error! Pledge not deleted')
+      }
+      setPledges(data.pledges)
+    })
+    .catch((error) => console.log("Error! Pledge not deleted"))
+}
 
   return (
     <main className='App'>
@@ -54,7 +44,6 @@ const handleSavePledge = (e: React.FormEvent, formData: IPledge): void => {
       {pledges.map((pledge: IPledge) => (
         <PledgeItem
           key={pledge._id}
-          // updatePledge={handleUpdatePledge}
           deletePledge={handleDeletePledge}
           pledge={pledge}
         />
@@ -63,4 +52,4 @@ const handleSavePledge = (e: React.FormEvent, formData: IPledge): void => {
   )
 }
 
-export default App
+export default Scratch;

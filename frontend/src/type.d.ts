@@ -1,3 +1,4 @@
+// Data model typing
 interface IPledge {
   _id: string,
   raw: string,
@@ -12,9 +13,37 @@ interface PledgeProps {
   pledge: IPledge,
 }
 
-type ApiDataType = {
+interface ICampaign {
+  _id: string,
+  name: string,
+  heading: string,
+  initial_target: number,
+  stretch_target: number,
+  phone_number: string,
+  sms_autoresponse: string,
+  active: boolean
+}
+
+interface CampaignProps {
+  campaign: ICampaign,
+}
+
+// Api data typing
+type ApiPledgeData = {
   message: string,
   status: string,
   pledges: IPledge[],
   pledge?: IPledge,
+}
+
+type ApiCampaignData = {
+  message: string,
+  status: string,
+  campaigns: ICampaign[],
+  campaign?: ICampaign,
+}
+
+// UI component typing
+interface TitleProps {
+  children?: React.ReactNode;
 }

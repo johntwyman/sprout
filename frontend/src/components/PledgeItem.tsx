@@ -1,7 +1,6 @@
 import React from "react"
 
 type Props = PledgeProps & {
-  // updatePledge: (pledge: IPledge) => void
   deletePledge: (_id: string) => void
 }
 
@@ -13,11 +12,6 @@ const Pledge: React.FC<Props> = ({ pledge, deletePledge }) => {
         <span>{pledge.name}</span>
       </div>
       <div className="Card--button">
-        <button
-          // onClick={() => updatePledge(pledge)}
-        >
-          Complete
-        </button>
         <button
           onClick={() => deletePledge(pledge._id)}
           className="Card--button__delete"
