@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import PledgeItem from '../../components/PledgeItem';
-import AddPledge from '../../components/AddPledge';
-import { getPledges, addPledge, deletePledge } from '../../api/pledges';
+import PledgeItem from '../../../components/PledgeItem';
+import AddPledge from '../../../components/AddPledge';
+import { getPledges, addPledge, deletePledge } from '../../../api/pledges';
 
-const Scratch: React.FC = () => {
+const ScratchPledge: React.FC = () => {
   const [pledges, setPledges] = useState<IPledge[]>([]);
 
   useEffect(() => {
@@ -52,4 +52,4 @@ const handleDeletePledge = (_id: string): void => {
   )
 }
 
-export default Scratch;
+export default ScratchPledge;
