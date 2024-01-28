@@ -21,7 +21,7 @@ import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import CampaignFormDialog from "../../components/CampaignDialog";
+import CampaignFormDialog from "./CampaignDialog";
 import Title from "../../components/Title";
 
 import {
