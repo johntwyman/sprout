@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material';
 import ScratchPledge from './pages/scratch/pledge';
-import ScratchCampaign from './pages/scratch/campaign';
 import Admin from './pages/admin';
 import CampaignDashboard from './pages/campaign';
 import theme from './helpers/theme';
@@ -25,11 +24,7 @@ const router = createBrowserRouter([
     element: <ScratchPledge />,
   },
   {
-    path: "/scratch/campaign",
-    element: <ScratchCampaign />,
-  },
-  {
-    path: "/admin/campaign",
+    path: "/admin/campaign/:campaignId",
     element: <CampaignDashboard />
   }
 ]);
