@@ -1,35 +1,31 @@
-import * as React from "react";
-import { useEffect, useState } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import TablePagination from "@mui/material/TablePagination";
-import TableContainer from "@mui/material/TableContainer";
-import Tooltip from "@mui/material/Tooltip";
-import AppBar from "@mui/material/AppBar";
-import Button from "@mui/material/Button";
-import ThermostatIcon from "@mui/icons-material/Thermostat";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import SettingsIcon from "@mui/icons-material/Settings";
-import DeleteIcon from "@mui/icons-material/Delete";
-import IconButton from "@mui/material/IconButton";
-import CssBaseline from "@mui/material/CssBaseline";
-import Stack from "@mui/material/Stack";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import CampaignFormDialog from "./CampaignDialog";
-import Title from "../../components/Title";
+import * as React from 'react';
 
-import {
-  getCampaigns,
-  addCampaign,
-  updateCampaign,
-  deleteCampaign,
-} from "../../api/campaigns";
+import DeleteIcon from '@mui/icons-material/Delete';
+import SettingsIcon from '@mui/icons-material/Settings';
+import ThermostatIcon from '@mui/icons-material/Thermostat';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import AppBar from '@mui/material/AppBar';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import Toolbar from '@mui/material/Toolbar';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+
+import { addCampaign, deleteCampaign, getCampaigns, updateCampaign } from '../../api/campaigns';
+import Link from '../../components/Link';
+import Title from '../../components/Title';
+import CampaignFormDialog from './CampaignDialog';
 
 const newCampaign = {
   _id: "",
@@ -43,14 +39,14 @@ const newCampaign = {
 };
 
 const Admin = (): React.ReactNode => {
-  const [campaigns, setCampaigns] = useState<ICampaign[]>([]);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [campaigns, setCampaigns] = React.useState<ICampaign[]>([]);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [dialogOpen, setDialogOpen] = React.useState(false);
   const [editableCampaign, setEditableCampaign] =
-    useState<ICampaign>(newCampaign);
+    React.useState<ICampaign>(newCampaign);
 
-  useEffect(() => {
+  React.useEffect(() => {
     fetchCampaigns();
   }, []);
 
@@ -156,7 +152,7 @@ const Admin = (): React.ReactNode => {
               <TableBody>
                 {visibleRows.map((campaign: ICampaign) => (
                   <TableRow key={campaign._id}>
-                    <TableCell>{campaign.heading}</TableCell>
+                    <TableCell><Link href={`/admin/campaign/${campaign._id}`}>{campaign.heading}</Link></TableCell>
                     <TableCell>{campaign.name}</TableCell>
                     <TableCell>{campaign.initial_target}</TableCell>
                     <TableCell>{campaign.stretch_target}</TableCell>

@@ -1,66 +1,27 @@
-import AppBar from "@mui/material/AppBar";
-import CssBaseline from "@mui/material/CssBaseline";
-import ThermostatIcon from "@mui/icons-material/Thermostat";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import { useParams } from "react-router-dom";
-import Chart from "./Chart";
-import Deposits from "./Summary";
-import Orders from "./Pledges";
-import { getCampaign } from "../../api/campaigns";
+import { useParams } from 'react-router-dom';
+
+import ThermostatIcon from '@mui/icons-material/Thermostat';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+
+import { getCampaign } from '../../api/campaigns';
+import NotFound from '../../components/NotFound';
+import Chart from './Chart';
+import Orders from './Pledges';
+import Deposits from './Summary';
 
 export default function CampaignDashboard() {
-  const NotFound = () => {
-    return (
-      <>
-        <CssBaseline />
-        <AppBar position="relative">
-          <Toolbar>
-            <ThermostatIcon sx={{ mr: 2 }} />
-            <Typography variant="h6" color="inherit" noWrap>
-              Sprout
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Box
-          component="main"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: "100vh",
-            overflow: "auto",
-          }}
-        >
-          <Container maxWidth="sm">
-            <Typography
-              component="h1"
-              variant="h4"
-              align="center"
-              color="text.primary"
-              gutterBottom
-            >
-              Not found
-            </Typography>
-          </Container>
-        </Box>
-      </>
-    );
-  };
 
   const { campaignId } = useParams();
+  const campaign = campaignId ? getCampaign(campaignId) : null;
+  if (!campaign) return <NotFound />;
 
-  if (!campaignId) { return <NotFound /> };
-  const campaign = getCampaign(campaignId);
-  if (!campaign) { return <NotFound /> };
-
-  console.log(campaignId);
   return (
     <>
       <CssBaseline />

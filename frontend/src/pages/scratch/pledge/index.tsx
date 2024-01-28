@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import PledgeItem from '../../../components/PledgeItem';
+
+import { addPledge, deletePledge, getPledges } from '../../../api/pledges';
 import AddPledge from '../../../components/AddPledge';
-import { getPledges, addPledge, deletePledge } from '../../../api/pledges';
+import PledgeItem from '../../../components/PledgeItem';
 
 const ScratchPledge: React.FC = () => {
   const [pledges, setPledges] = useState<IPledge[]>([]);

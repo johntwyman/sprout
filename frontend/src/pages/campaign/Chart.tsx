@@ -1,7 +1,9 @@
 import * as React from 'react';
+
 import { useTheme } from '@mui/material/styles';
-import { LineChart, axisClasses } from '@mui/x-charts';
+import { axisClasses, LineChart } from '@mui/x-charts';
 import { ChartsTextStyle } from '@mui/x-charts/ChartsText';
+
 import Title from '../../components/Title';
 
 // Generate Sales Data
