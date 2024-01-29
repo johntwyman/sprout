@@ -27,7 +27,7 @@ import Link from '../../components/Link';
 import Title from '../../components/Title';
 import CampaignFormDialog from './CampaignDialog';
 
-const newCampaign = {
+const newCampaign: ICampaign = {
   _id: "",
   name: "",
   heading: "",
@@ -133,9 +133,7 @@ const Admin = (): React.ReactNode => {
         </Toolbar>
       </AppBar>
       <main>
-        {/* Hero unit */}
         <Container sx={{ py: 8 }} maxWidth="md">
-          {/* End hero unit */}
           <Title>Campaigns</Title>
           <TableContainer>
             <Table size="small">
@@ -152,7 +150,11 @@ const Admin = (): React.ReactNode => {
               <TableBody>
                 {visibleRows.map((campaign: ICampaign) => (
                   <TableRow key={campaign._id}>
-                    <TableCell><Link href={`/admin/campaign/${campaign._id}`}>{campaign.heading}</Link></TableCell>
+                    <TableCell>
+                      <Link href={`/admin/campaign/${campaign._id}`}>
+                        {campaign.heading}
+                      </Link>
+                    </TableCell>
                     <TableCell>{campaign.name}</TableCell>
                     <TableCell>{campaign.initial_target}</TableCell>
                     <TableCell>{campaign.stretch_target}</TableCell>

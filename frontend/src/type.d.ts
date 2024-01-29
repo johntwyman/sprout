@@ -13,6 +13,10 @@ interface PledgeProps {
   pledge: IPledge,
 }
 
+type PledgeContextType = {
+  pledges: IPledge[],
+}
+
 interface ICampaign {
   _id: string,
   name: string,

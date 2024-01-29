@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     loader: async ({ request, params }) => {
       const campaignId = params.campaignId;
       const campaign = await getCampaign(campaignId as string);
-      return { campaign }; // Object will be available via useLoaderData() in the CampaignDashboard component.
+      return campaign.data.campaign; // Object will be available via useLoaderData() in the CampaignDashboard component.
     },
     errorElement: <NotFound />, // Display the NotFound component if an error occurs while loading the campaign data. This will be displayed instead of the CampaignDashboard component.
   },

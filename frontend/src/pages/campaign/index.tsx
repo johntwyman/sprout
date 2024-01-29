@@ -11,14 +11,26 @@ import Paper from '@mui/material/Paper';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-import { getCampaign } from '../../api/campaign';
-import NotFound from '../404';
+import { deletePledge, getPledges, updatePledge } from '../../api/pledge';
 import Chart from './Chart';
-import Orders from './Pledges';
-import Deposits from './Summary';
+import Pledges from './Pledges';
+import Summary from './Summary';
 
 const CampaignDashboard: React.FC = () => {
-  const campaign = useLoaderData();
+  const [pledges, setPledges] = React.useState<IPledge[]>([]);
+
+  const campaign = useLoaderData() as ICampaign;
+
+  React.useEffect(() => {
+    fetchPledges();
+  }, [campaign]);
+
+  const fetchPledges = (): void => {
+    getPledges(campaign.name)
+      .then(({ data: { pledges } }: IPledge[] | any) => setPledges(pledges))
+      .catch((err: Error) => console.log(err));
+  };
+
   return (
     <>
       <CssBaseline />
@@ -40,6 +52,7 @@ const CampaignDashboard: React.FC = () => {
           flexGrow: 1,
           height: "100vh",
           overflow: "auto",
+          pt: 2,
         }}
       >
         <Container maxWidth="sm">
@@ -50,7 +63,7 @@ const CampaignDashboard: React.FC = () => {
             color="text.primary"
             gutterBottom
           >
-            Campaigns
+            {campaign.heading}
           </Typography>
         </Container>
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -68,7 +81,7 @@ const CampaignDashboard: React.FC = () => {
                 <Chart />
               </Paper>
             </Grid>
-            {/* Recent Deposits */}
+            {/* Summary */}
             <Grid item xs={12} md={4} lg={3}>
               <Paper
                 sx={{
@@ -78,13 +91,13 @@ const CampaignDashboard: React.FC = () => {
                   height: 240,
                 }}
               >
-                <Deposits />
+                <Summary />
               </Paper>
             </Grid>
-            {/* Recent Orders */}
+            {/* Pledges */}
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                <Orders />
+                <Pledges />
               </Paper>
             </Grid>
           </Grid>
@@ -92,6 +105,6 @@ const CampaignDashboard: React.FC = () => {
       </Box>
     </>
   );
-}
+};
 
 export default CampaignDashboard;

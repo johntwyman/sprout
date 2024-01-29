@@ -29,9 +29,15 @@ const data = [
 export default function Chart() {
   const theme = useTheme();
 
+  // retrieve pledges
+  // construct chart data
+  // set axis scales appropriately
+  // - if pledge < stretch, set max to stretch
+  // - if pledge > stretch, set max to pledge * 1.5
+
   return (
     <React.Fragment>
-      <Title>Today</Title>
+      <Title>Pledges</Title>
       <div style={{ width: '100%', flexGrow: 1, overflow: 'hidden' }}>
         <LineChart
           dataset={data}
@@ -51,7 +57,7 @@ export default function Chart() {
           ]}
           yAxis={[
             {
-              label: 'Sales ($)',
+              label: 'Amount ($)',
               labelStyle: {
                 ...(theme.typography.body1 as ChartsTextStyle),
                 fill: theme.palette.text.primary,

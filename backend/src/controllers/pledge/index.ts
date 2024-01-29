@@ -6,7 +6,13 @@ import { IPledge } from '../../types/pledge';
 
 const getPledges = async (_req: Request, res: Response): Promise<void> => {
   try {
-    const pledges: IPledge[] = await Pledge.find();
+    const { campaign_name } = _req.query;
+    let pledges: IPledge[] = [];
+    if (campaign_name) {
+      pledges = await Pledge.find({ campaign_name: campaign_name });
+    } else {
+      pledges = await Pledge.find();
+    }
     res.status(200).json({ pledges });
   } catch (error) {
     console.error(error);

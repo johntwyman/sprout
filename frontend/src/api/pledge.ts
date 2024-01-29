@@ -3,11 +3,12 @@ import axios, { AxiosResponse } from 'axios';
 
 const baseUrl: string = "http://localhost:4000";
 
-export const getPledges = async (): Promise<AxiosResponse<ApiPledgeData>> => {
+export const getPledges = async (campaign_name?: string): Promise<AxiosResponse<ApiPledgeData>> => {
   try {
     const pledges: AxiosResponse<ApiPledgeData> = await axios.get(
-      baseUrl + "/pledges"
-    )
+      baseUrl + "/pledges", {
+      params: { campaign_name },
+    })
     return pledges;
   }
   catch (error) {
