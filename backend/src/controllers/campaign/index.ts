@@ -36,7 +36,6 @@ const getCampaign = async (req: Request, res: Response): Promise<void> => {
 }
 
 const addCampaign = async (req: Request, res: Response): Promise<void> => {
-  console.log(req.body);
   const body = req.body as Pick<ICampaign, "name" | "heading" | "initial_target" | "stretch_target" | "phone_number" | "sms_autoresponse" | "active">;
   const campaign: ICampaign = new Campaign({
     name: body.name,

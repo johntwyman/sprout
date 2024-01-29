@@ -8,64 +8,63 @@ import { ChartsTextStyle } from '@mui/x-charts/ChartsText';
 import Title from '../../components/Title';
 import { usePledgesContext } from './Context';
 
-// Generate Sales Data
-function createData(
-  time: string,
-  amount?: number,
-): { time: string; amount: number | null } {
-  return { time, amount: amount ?? null };
-}
-
-const data = [
-  createData('00:00', 0),
-  createData('03:00', 300),
-  createData('06:00', 600),
-  createData('09:00', 800),
-  createData('12:00', 1500),
-  createData('15:00', 2000),
-  createData('18:00', 2400),
-  createData('21:00', 2400),
-  createData('24:00'),
-];
-
+// Interface and function to generate chart data from pledges
 interface ChartPledgeData {
   time: string;
   amount: number | null;
+  [index: string]: any;
 }
-
 const chartPledgeData = (data: Pick<IPledge, "receivedAt" | "amount">[]): ChartPledgeData[] => {
   const sortedPledges = data.sort((a, b) => {
     const dateA = DateTime.fromISO(a.receivedAt);
     const dateB = DateTime.fromISO(b.receivedAt);
     return dateA.valueOf() - dateB.valueOf();
   });
-  return sortedPledges.map((pledge) => {
-    const dateTime = DateTime.fromISO(pledge.receivedAt);
-    const localDateTime = dateTime.setZone('local').setLocale('en-au');
-    const formattedTime = localDateTime.toFormat('hh:mm');
 
-    return {
-      time: formattedTime,
-      amount: pledge.amount,
+  // group the data by "hh:mm"
+  const groupedPledges = sortedPledges.reduce((acc, pledge) => {
+    const time = DateTime.fromISO(pledge.receivedAt).setZone('local').setLocale('en-au').toFormat('hh:mm');
+    const existingGroup = acc.find((group) => group.time === time);
+    if (existingGroup) {
+      existingGroup.amount = (existingGroup.amount ?? 0) + pledge.amount;
+    } else {
+      acc.push({ time, amount: pledge.amount });
     }
+    return acc;
+  }, [] as ChartPledgeData[]);
+
+  // map the grouped data to a new array that has a simple accumulator
+  let totalAmount = 0;
+  const finalChartData = groupedPledges.map((group) => {
+    totalAmount += group.amount ?? 0;
+    return { time: group.time, amount: totalAmount };
   });
+  return finalChartData;
 }
 
-export default function Chart() {
+type Props = {
+  initialTarget: number;
+  stretchTarget: number;
+}
+
+const Chart: React.FC<Props> = ({ initialTarget, stretchTarget }) => {
   const theme = useTheme();
 
   const { pledges } = usePledgesContext();
-  // construct chart data
-  // set axis scales appropriately
+  const chartData = chartPledgeData(pledges);
+
+  // Determine appropriate values for axis scales, etc.
   // - if pledge < stretch, set max to stretch
   // - if pledge > stretch, set max to pledge * 1.5
+  const total = pledges.reduce((acc, pledge) => acc + pledge.amount, 0);
+  const maxChartAmount = total > stretchTarget ? total * 1.5 : stretchTarget;
 
   return (
     <React.Fragment>
       <Title>Pledges</Title>
       <div style={{ width: '100%', flexGrow: 1, overflow: 'hidden' }}>
         <LineChart
-          dataset={chartPledgeData(pledges)}
+          dataset={chartData}
           margin={{
             top: 16,
             right: 20,
@@ -88,7 +87,7 @@ export default function Chart() {
                 fill: theme.palette.text.primary,
               },
               tickLabelStyle: theme.typography.body2 as ChartsTextStyle,
-              max: 2500,
+              max: maxChartAmount,
               tickNumber: 3,
             },
           ]}
@@ -111,3 +110,5 @@ export default function Chart() {
     </React.Fragment>
   );
 }
+
+export default Chart;

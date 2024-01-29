@@ -12,7 +12,6 @@ function preventDefault(event: React.MouseEvent) {
 
 export default function Summary() {
   const { pledges } = usePledgesContext();
-  console.log(pledges);
   // create a const totalAmount that is the sum of the amount key in the pledges array
   const total = pledges.reduce((acc, pledge) => acc + pledge.amount, 0);
   const formatter = new Intl.NumberFormat('en-AU', { style: 'currency', currency: 'AUD' });

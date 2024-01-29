@@ -79,7 +79,7 @@ const CampaignDashboard: React.FC = () => {
                   height: 240,
                 }}
               >
-                <Chart />
+                <Chart initialTarget={campaign.initial_target} stretchTarget={campaign.stretch_target} />
               </Paper>
             </Grid>
             {/* Summary */}
