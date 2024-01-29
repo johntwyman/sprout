@@ -47,7 +47,7 @@ type Props = {
   stretchTarget: number;
 }
 
-const Chart: React.FC<Props> = ({ initialTarget, stretchTarget }) => {
+const Chart: React.FC<Props> = ({ stretchTarget }) => {
   const theme = useTheme();
 
   const { pledges } = usePledgesContext();

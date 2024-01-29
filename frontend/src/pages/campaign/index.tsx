@@ -92,7 +92,7 @@ const CampaignDashboard: React.FC = () => {
                   height: 240,
                 }}
               >
-                <Summary />
+                <Summary initialTarget={campaign.initial_target} stretchTarget={campaign.stretch_target} />
               </Paper>
             </Grid>
             {/* Pledges */}

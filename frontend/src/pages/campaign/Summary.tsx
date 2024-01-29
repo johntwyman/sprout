@@ -10,7 +10,12 @@ function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
 }
 
-export default function Summary() {
+type Props = {
+  initialTarget: number;
+  stretchTarget: number;
+}
+
+const Summary: React.FC<Props> = ({ initialTarget, stretchTarget }) => {
   const { pledges } = usePledgesContext();
   // create a const totalAmount that is the sum of the amount key in the pledges array
   const total = pledges.reduce((acc, pledge) => acc + pledge.amount, 0);
@@ -27,6 +32,12 @@ export default function Summary() {
       <Typography color="text.secondary" sx={{ flex: 1 }}>
         {numberPledges} pledges
       </Typography>
+      <Typography color="text.secondary" sx={{ flex: 1 }}>
+        Initial target: {formatter.format(initialTarget)}
+      </Typography>
+      <Typography color="text.secondary" sx={{ flex: 1 }}>
+        Stretch target: {formatter.format(stretchTarget)}
+      </Typography>
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>
           Download pledge data
@@ -35,3 +46,5 @@ export default function Summary() {
     </React.Fragment>
   );
 }
+
+export default Summary;
