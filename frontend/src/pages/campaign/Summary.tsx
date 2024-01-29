@@ -4,20 +4,29 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
 import Title from '../../components/Title';
+import { usePledgesContext } from './Context';
 
 function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
 }
 
 export default function Summary() {
+  const { pledges } = usePledgesContext();
+  console.log(pledges);
+  // create a const totalAmount that is the sum of the amount key in the pledges array
+  const total = pledges.reduce((acc, pledge) => acc + pledge.amount, 0);
+  const formatter = new Intl.NumberFormat('en-AU', { style: 'currency', currency: 'AUD' });
+  const amountPledged = formatter.format(total);
+  const numberPledges = pledges.length;
+
   return (
     <React.Fragment>
       <Title>Summary</Title>
       <Typography component="p" variant="h4">
-        $3,024.00
+        {amountPledged}
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-        37 pledges
+        {numberPledges} pledges
       </Typography>
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>

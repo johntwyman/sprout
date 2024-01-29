@@ -23,7 +23,7 @@ const newPledge: IPledge = {
   raw: "",
   receivedAt: "",
   number: "",
-  amount: "",
+  amount: 0,
   name: "",
   campaign_name: "",
 }
@@ -94,7 +94,7 @@ export default function Pledges() {
 
   return (
     <React.Fragment>
-      <Title>Pledges</Title>
+      <Title>Details</Title>
           <TableContainer>
             <Table size="small">
               <TableHead>
@@ -115,7 +115,7 @@ export default function Pledges() {
                     <TableCell>{pledge.name}</TableCell>
                     <TableCell align="right">
                       <IconButton onClick={() => handleEditPledge(pledge)}>
-                        <Tooltip title="Details" aria-label="Details">
+                        <Tooltip title="Edit pledge" aria-label="Edit pledge">
                           <EditIcon />
                         </Tooltip>
                       </IconButton>

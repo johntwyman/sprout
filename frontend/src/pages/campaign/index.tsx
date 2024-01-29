@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-import { deletePledge, getPledges, updatePledge } from '../../api/pledge';
+import { getPledges } from '../../api/pledge';
 import Chart from './Chart';
 import PledgesProvider from './Context';
 import Pledges from './Pledges';

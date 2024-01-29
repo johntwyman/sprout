@@ -4,7 +4,7 @@ interface IPledge {
   raw: string,
   receivedAt: string,
   number: string,
-  amount: string,
+  amount: number,
   name: string,
   campaign_name: string,
 }

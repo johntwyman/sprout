@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import * as React from 'react';
 
 import { useTheme } from '@mui/material/styles';
@@ -5,6 +6,7 @@ import { axisClasses, LineChart } from '@mui/x-charts';
 import { ChartsTextStyle } from '@mui/x-charts/ChartsText';
 
 import Title from '../../components/Title';
+import { usePledgesContext } from './Context';
 
 // Generate Sales Data
 function createData(
@@ -26,10 +28,33 @@ const data = [
   createData('24:00'),
 ];
 
+interface ChartPledgeData {
+  time: string;
+  amount: number | null;
+}
+
+const chartPledgeData = (data: Pick<IPledge, "receivedAt" | "amount">[]): ChartPledgeData[] => {
+  const sortedPledges = data.sort((a, b) => {
+    const dateA = DateTime.fromISO(a.receivedAt);
+    const dateB = DateTime.fromISO(b.receivedAt);
+    return dateA.valueOf() - dateB.valueOf();
+  });
+  return sortedPledges.map((pledge) => {
+    const dateTime = DateTime.fromISO(pledge.receivedAt);
+    const localDateTime = dateTime.setZone('local').setLocale('en-au');
+    const formattedTime = localDateTime.toFormat('hh:mm');
+
+    return {
+      time: formattedTime,
+      amount: pledge.amount,
+    }
+  });
+}
+
 export default function Chart() {
   const theme = useTheme();
 
-  // retrieve pledges
+  const { pledges } = usePledgesContext();
   // construct chart data
   // set axis scales appropriately
   // - if pledge < stretch, set max to stretch
@@ -40,7 +65,7 @@ export default function Chart() {
       <Title>Pledges</Title>
       <div style={{ width: '100%', flexGrow: 1, overflow: 'hidden' }}>
         <LineChart
-          dataset={data}
+          dataset={chartPledgeData(pledges)}
           margin={{
             top: 16,
             right: 20,
