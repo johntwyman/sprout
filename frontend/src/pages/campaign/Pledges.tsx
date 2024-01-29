@@ -1,6 +1,9 @@
+import { DateTime } from 'luxon';
 import * as React from 'react';
 
-import Link from '@mui/material/Link';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SettingsIcon from '@mui/icons-material/Settings';
+import { IconButton } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,9 +11,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import Tooltip from '@mui/material/Tooltip';
 
 import { addPledge, deletePledge, getPledges, updatePledge } from '../../api/pledge';
 import Title from '../../components/Title';
+import { usePledgesContext } from './Context';
+import PledgeFormDialog from './PledgeDialog';
 
 const newPledge: IPledge = {
   _id: "",
@@ -22,34 +28,69 @@ const newPledge: IPledge = {
   campaign_name: "",
 }
 export default function Pledges() {
-  const [pledges, setPledges] = React.useState<IPledge[]>([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [editablePledge, setEditablePledge] = React.useState<IPledge>(newPledge);
+  const { pledges, setPledges } = usePledgesContext();
 
-  const handleDeletePledge = (id: string) => {
-    deletePledge(id).then(() => {
-      getPledges().then((pledges: IPledge[]) => {
-        setPledges(pledges);
-      });
-    });
+  const handleCloseDialog = (): void => setDialogOpen(false);
+  const handleEditPledge = (pledge: IPledge): void => {
+    setEditablePledge(pledge);
+    setDialogOpen(true);
   };
 
-  const handleEditPledge = (pledge: IPledge) => {
-    console.log("Edit Pledge", pledge);
+  const handleUpdatePledge = (pledge: IPledge): void => {
+    updatePledge(pledge)
+      .then(({ status, data }) => {
+        if (status !== 200) {
+          throw new Error("Error! Campaign not updated");
+        }
+        setPledges(data.pledges);
+      })
+      .catch((error) => console.log("Error! Campaign not updated"));
   };
 
-  const toggleActivePledge = (pledge: IPledge) => {
-    updatePledge(pledge._id, { active: !pledge.active }).then(() => {
-      getPledges().then((pledges: IPledge[]) => {
-        setPledges(pledges);
-      });
-    });
+  const handleAddPledge = (pledge: IPledge): void => {
+    addPledge(pledge)
+      .then(({ status, data }) => {
+        if (status !== 201) {
+          throw new Error("Error! Campaign not added");
+        }
+        setPledges(data.pledges);
+      })
+      .catch((error) => console.log("Error! Campaign not added"));
+  };
+
+  const handleDeletePledge = (id: string): void => {
+    deletePledge(id)
+      .then(({ status, data }) => {
+        if (status !== 200) {
+          throw new Error("Error! Campaign not deleted");
+        }
+        setPledges(data.pledges);
+      })
+      .catch((error) => console.log("Error! Campaign not deleted"));
+  };
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
 
   const visibleRows = pledges.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
+  const localisedDate = (receivedAt: string) => {
+    const dateTime = DateTime.fromISO(receivedAt);
+    const localDateTime = dateTime.setZone('local');
+    return localDateTime.setLocale('en-au').toLocaleString(DateTime.TIME_WITH_SHORT_OFFSET);
+  }
 
   return (
     <React.Fragment>
@@ -58,51 +99,32 @@ export default function Pledges() {
             <Table size="small">
               <TableHead>
                 <TableRow>
-                  <TableCell>Heading</TableCell>
-                  <TableCell>URL</TableCell>
-                  <TableCell>Goal</TableCell>
-                  <TableCell>Stretch</TableCell>
-                  <TableCell>Phone Number</TableCell>
+                  <TableCell>Date received</TableCell>
+                  <TableCell>Number</TableCell>
+                  <TableCell>Amount</TableCell>
+                  <TableCell>Name</TableCell>
                   <TableCell align="right"></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {visibleRows.map((campaign: ICampaign) => (
-                  <TableRow key={campaign._id}>
-                    <TableCell>
-                      <Link href={`/admin/campaign/${campaign._id}`}>
-                        {campaign.heading}
-                      </Link>
-                    </TableCell>
-                    <TableCell>{campaign.name}</TableCell>
-                    <TableCell>{campaign.initial_target}</TableCell>
-                    <TableCell>{campaign.stretch_target}</TableCell>
-                    <TableCell>{campaign.phone_number}</TableCell>
+                {visibleRows.map((pledge: IPledge) => (
+                  <TableRow key={pledge._id}>
+                    <TableCell>{localisedDate(pledge.receivedAt)}</TableCell>
+                    <TableCell>{pledge.number}</TableCell>
+                    <TableCell>{pledge.amount}</TableCell>
+                    <TableCell>{pledge.name}</TableCell>
                     <TableCell align="right">
-                      <IconButton
-                        onClick={() => toggleActiveCampaign(campaign)}
-                      >
-                        {campaign.active ? (
-                          <Tooltip title="Active" aria-label="Active">
-                            <VisibilityIcon />
-                          </Tooltip>
-                        ) : (
-                          <Tooltip title="Disabled" aria-label="Disabled">
-                            <VisibilityOffIcon />
-                          </Tooltip>
-                        )}
-                      </IconButton>
-                      <IconButton onClick={() => handleEditCampaign(campaign)}>
+                      <IconButton onClick={() => handleEditPledge(pledge)}>
                         <Tooltip title="Details" aria-label="Details">
                           <SettingsIcon />
                         </Tooltip>
                       </IconButton>
                       <IconButton
-                        onClick={() => handleDeleteCampaign(campaign._id)}
+                        onClick={() => handleDeletePledge(pledge._id)}
                       >
                         <Tooltip
-                          title="Delete campaign"
-                          aria-label="Delete campaign"
+                          title="Delete pledge"
+                          aria-label="Delete pledge"
                         >
                           <DeleteIcon />
                         </Tooltip>
@@ -116,18 +138,18 @@ export default function Pledges() {
           <TablePagination
             rowsPerPageOptions={[5, 10]}
             component="div"
-            count={campaigns.length}
+            count={pledges.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
-          <CampaignFormDialog
+          <PledgeFormDialog
             open={dialogOpen}
             onClose={handleCloseDialog}
-            campaign={editableCampaign}
-            handleCreateCampaign={handleAddCampaign}
-            handleUpdateCampaign={handleUpdateCampaign}
+            pledge={editablePledge}
+            handleCreateCampaign={handleAddPledge}
+            handleUpdateCampaign={handleUpdatePledge}
           />
     </React.Fragment>
   );

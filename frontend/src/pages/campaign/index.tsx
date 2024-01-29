@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 
 import { deletePledge, getPledges, updatePledge } from '../../api/pledge';
 import Chart from './Chart';
+import PledgesProvider from './Context';
 import Pledges from './Pledges';
 import Summary from './Summary';
 
@@ -32,7 +33,7 @@ const CampaignDashboard: React.FC = () => {
   };
 
   return (
-    <>
+    <PledgesProvider>
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
@@ -103,7 +104,7 @@ const CampaignDashboard: React.FC = () => {
           </Grid>
         </Container>
       </Box>
-    </>
+    </PledgesProvider>
   );
 };
 

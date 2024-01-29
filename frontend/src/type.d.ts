@@ -15,6 +15,7 @@ interface PledgeProps {
 
 type PledgeContextType = {
   pledges: IPledge[],
+  setPledges: React.Dispatch<React.SetStateAction<IPledge[]>>,
 }
 
 interface ICampaign {

@@ -104,7 +104,6 @@ const CampaignFormDialog: React.FC<CampaignFormDialogProps> = ({
               required
             />
           </Grid>
-          {/* Add fields for other campaign properties here */}
           <Grid item xs={12}>
             <Box display="flex" justifyContent="flex-end">
               <Button variant="text" onClick={onClose}>
