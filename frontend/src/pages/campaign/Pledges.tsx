@@ -2,7 +2,7 @@ import { DateTime } from 'luxon';
 import * as React from 'react';
 
 import DeleteIcon from '@mui/icons-material/Delete';
-import SettingsIcon from '@mui/icons-material/Settings';
+import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -116,7 +116,7 @@ export default function Pledges() {
                     <TableCell align="right">
                       <IconButton onClick={() => handleEditPledge(pledge)}>
                         <Tooltip title="Details" aria-label="Details">
-                          <SettingsIcon />
+                          <EditIcon />
                         </Tooltip>
                       </IconButton>
                       <IconButton
@@ -148,8 +148,8 @@ export default function Pledges() {
             open={dialogOpen}
             onClose={handleCloseDialog}
             pledge={editablePledge}
-            handleCreateCampaign={handleAddPledge}
-            handleUpdateCampaign={handleUpdatePledge}
+            handleCreatePledge={handleAddPledge}
+            handleUpdatePledge={handleUpdatePledge}
           />
     </React.Fragment>
   );
