@@ -38,7 +38,7 @@ const NotFound = () => {
             color="text.primary"
             gutterBottom
           >
-            Not found
+            404 not found
           </Typography>
         </Container>
       </Box>

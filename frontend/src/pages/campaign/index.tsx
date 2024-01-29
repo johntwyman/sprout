@@ -1,4 +1,5 @@
-import { useParams } from 'react-router-dom';
+import React from 'react';
+import { useLoaderData } from 'react-router-dom';
 
 import ThermostatIcon from '@mui/icons-material/Thermostat';
 import AppBar from '@mui/material/AppBar';
@@ -10,18 +11,14 @@ import Paper from '@mui/material/Paper';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-import { getCampaign } from '../../api/campaigns';
-import NotFound from '../../components/NotFound';
+import { getCampaign } from '../../api/campaign';
+import NotFound from '../404';
 import Chart from './Chart';
 import Orders from './Pledges';
 import Deposits from './Summary';
 
-export default function CampaignDashboard() {
-
-  const { campaignId } = useParams();
-  const campaign = campaignId ? getCampaign(campaignId) : null;
-  if (!campaign) return <NotFound />;
-
+const CampaignDashboard: React.FC = () => {
+  const campaign = useLoaderData();
   return (
     <>
       <CssBaseline />
@@ -96,3 +93,5 @@ export default function CampaignDashboard() {
     </>
   );
 }
+
+export default CampaignDashboard;

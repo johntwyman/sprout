@@ -46,13 +46,15 @@ const CampaignFormDialog: React.FC<CampaignFormDialogProps> = ({
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
-              label="Name"
+              label="Name (used for the URL)"
               name="name"
               value={formData.name}
               onChange={handleChange}
               fullWidth
               required
             />
+          </Grid>
+          <Grid item xs={12}>
             <TextField
               label="Heading"
               name="heading"
@@ -61,6 +63,8 @@ const CampaignFormDialog: React.FC<CampaignFormDialogProps> = ({
               fullWidth
               required
             />
+          </Grid>
+          <Grid item xs={12}>
             <TextField
               label="Initial target"
               name="initial_target"
@@ -69,6 +73,8 @@ const CampaignFormDialog: React.FC<CampaignFormDialogProps> = ({
               fullWidth
               required
             />
+          </Grid>
+          <Grid item xs={12}>
             <TextField
               label="Stretch target"
               name="stretch_target"
@@ -77,6 +83,8 @@ const CampaignFormDialog: React.FC<CampaignFormDialogProps> = ({
               fullWidth
               required
             />
+          </Grid>
+          <Grid item xs={12}>
             <TextField
               label="Phone number"
               name="phone_number"
@@ -85,6 +93,8 @@ const CampaignFormDialog: React.FC<CampaignFormDialogProps> = ({
               fullWidth
               required
             />
+          </Grid>
+          <Grid item xs={12}>
             <TextField
               label="SMS Autoresponse"
               name="sms_autoresponse"

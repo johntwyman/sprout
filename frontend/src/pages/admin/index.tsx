@@ -22,7 +22,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
-import { addCampaign, deleteCampaign, getCampaigns, updateCampaign } from '../../api/campaigns';
+import { addCampaign, deleteCampaign, getCampaigns, updateCampaign } from '../../api/campaign';
 import Link from '../../components/Link';
 import Title from '../../components/Title';
 import CampaignFormDialog from './CampaignDialog';

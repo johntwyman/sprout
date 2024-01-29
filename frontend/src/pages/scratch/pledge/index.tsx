@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { addPledge, deletePledge, getPledges } from '../../../api/pledges';
+import { addPledge, deletePledge, getPledges } from '../../../api/pledge';
 import AddPledge from '../../../components/AddPledge';
 import PledgeItem from '../../../components/PledgeItem';
 
