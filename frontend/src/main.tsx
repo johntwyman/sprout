@@ -14,7 +14,7 @@ import { getCampaign } from './api/campaign';
 import theme from './helpers/theme';
 import NotFound from './pages/404';
 import Admin from './pages/admin';
-import CampaignDashboard from './pages/campaign';
+import CampaignDashboard from './pages/campaigndashboard';
 import ScratchPledge from './pages/scratch/pledge';
 
 // Set up routing

@@ -1,6 +1,12 @@
-import { Router } from "express";
-import { getPledges, getPledge, addPledge, updatePledge, deletePledge } from "../controllers/pledge";
-import { getCampaigns, getCampaign, addCampaign, updateCampaign, deleteCampaign } from "../controllers/campaign";
+import { Router } from 'express';
+
+import {
+    addCampaign, deleteCampaign, getCampaign, getCampaigns, updateCampaign
+} from '../controllers/campaign';
+import {
+    addPledge, deletePledge, getPledge, getPledges, updatePledge
+} from '../controllers/pledge';
+import { addSMSPledge } from '../controllers/sms';
 
 const router: Router = Router();
 
@@ -10,6 +16,9 @@ router.get("/pledge/:id", getPledge);
 router.post("/pledge", addPledge);
 router.put("/pledge/:id", updatePledge);
 router.delete("/pledge/:id", deletePledge);
+
+// Inbound SMS route
+router.post("/sms/:campaign_name", addSMSPledge);
 
 // Campaign routes
 router.get("/campaigns", getCampaigns);

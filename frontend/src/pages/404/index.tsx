@@ -6,6 +6,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
+import Thermometer from '../campaign/Thermometer';
+
 const NotFound = () => {
   return (
     <>
@@ -40,6 +42,7 @@ const NotFound = () => {
           >
             404 not found
           </Typography>
+          <Thermometer pledgedAmount={300} initialTarget={2000} stretchTarget={4000} />
         </Container>
       </Box>
     </>
