@@ -42,12 +42,12 @@ const chartPledgeData = (data: Pick<IPledge, "receivedAt" | "amount">[]): ChartP
   return finalChartData;
 }
 
-type Props = {
+type ChartProps = {
   initialTarget: number;
   stretchTarget: number;
 }
 
-const Chart: React.FC<Props> = ({ stretchTarget }) => {
+const Chart: React.FC<ChartProps> = ({ stretchTarget }) => {
   const theme = useTheme();
 
   const { pledges } = usePledgesContext();

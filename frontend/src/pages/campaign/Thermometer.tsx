@@ -1,12 +1,12 @@
 import React from 'react';
 
-type Props = {
+type ThermometerProps = {
   pledgedAmount: number;
   initialTarget: number;
   stretchTarget: number;
 }
 
-const Thermometer: React.FC<Props> = ({ pledgedAmount, initialTarget, stretchTarget }) => {
+const Thermometer: React.FC<ThermometerProps> = ({ pledgedAmount, initialTarget, stretchTarget }) => {
   const targetAmount = pledgedAmount > stretchTarget ? stretchTarget :
     pledgedAmount > initialTarget ? stretchTarget : initialTarget;
 
