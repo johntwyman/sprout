@@ -16,14 +16,9 @@ import { getCampaign } from './api/campaign';
 import { AuthGuard } from './components/AuthGuard';
 import NotFound from './pages/404';
 import Admin from './pages/admin';
+import Campaign from './pages/campaign';
 import CampaignDashboard from './pages/campaigndashboard';
 import ScratchPledge from './pages/scratch/pledge';
-
-// Constants used for session timeout, etc.
-const DAY_LENGTH = 1000 * 60 * 60 * 24; // In milliseconds.
-const MINUTE_LENGTH = 60000; // In milliseconds.
-const TIMEOUT_SHOW_DIALOG = 5 * 60 * 1000; // 5 minutes, in milliseconds.
-const defaultExpiryTime = new Date().getTime() + DAY_LENGTH;
 
 // Set up routing
 const router = createBrowserRouter([
@@ -34,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/scratch/pledge",
     element: <ScratchPledge />,
+  },
+  {
+    path: "/campaign/",
+    element: <Campaign />,
   },
   {
     path: "/admin/campaign/:campaignId",
