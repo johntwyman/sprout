@@ -12,6 +12,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 import { getPledges } from '../../api/pledge';
+import Link from '../../components/Link';
 import Chart from './Chart';
 import PledgesProvider from './Context';
 import Pledges from './Pledges';
@@ -39,7 +40,7 @@ const CampaignDashboard: React.FC = () => {
         <Toolbar>
           <ThermostatIcon sx={{ mr: 2 }} />
           <Typography variant="h6" color="inherit" noWrap>
-            Sprout
+          <Link color="inherit" style={{ textDecoration: 'none' }} href="/admin">Sprout</Link>e
           </Typography>
         </Toolbar>
       </AppBar>
