@@ -10,12 +10,12 @@ function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
 }
 
-type Props = {
+type SummaryProps = {
   initialTarget: number;
   stretchTarget: number;
 }
 
-const Summary: React.FC<Props> = ({ initialTarget, stretchTarget }) => {
+const Summary: React.FC<SummaryProps> = ({ initialTarget, stretchTarget }) => {
   const { pledges } = usePledgesContext();
   // create a const totalAmount that is the sum of the amount key in the pledges array
   const total = pledges.reduce((acc, pledge) => acc + pledge.amount, 0);
