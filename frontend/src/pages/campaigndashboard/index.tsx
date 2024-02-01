@@ -40,7 +40,7 @@ const CampaignDashboard: React.FC = () => {
         <Toolbar>
           <ThermostatIcon sx={{ mr: 2 }} />
           <Typography variant="h6" color="inherit" noWrap>
-          <Link color="inherit" style={{ textDecoration: 'none' }} href="/admin">Sprout</Link>e
+          <Link color="inherit" style={{ textDecoration: 'none' }} href="/admin">Sprout</Link>
           </Typography>
         </Toolbar>
       </AppBar>
