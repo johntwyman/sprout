@@ -7,24 +7,25 @@ import {
     addPledge, deletePledge, getPledge, getPledges, updatePledge
 } from '../controllers/pledge';
 import { addSMSPledge } from '../controllers/sms';
+import { validateAccessToken } from '../middleware/auth0.middleware';
 
 const router: Router = Router();
 
 // Pledge routes
-router.get("/pledges", getPledges);
-router.get("/pledge/:id", getPledge);
-router.post("/pledge", addPledge);
-router.put("/pledge/:id", updatePledge);
-router.delete("/pledge/:id", deletePledge);
+router.get("/pledges", validateAccessToken, getPledges);
+router.get("/pledge/:id", validateAccessToken, getPledge);
+router.post("/pledge", validateAccessToken, addPledge);
+router.put("/pledge/:id", validateAccessToken, updatePledge);
+router.delete("/pledge/:id", validateAccessToken, deletePledge);
 
 // Inbound SMS route
 router.post("/sms/:campaign_name", addSMSPledge);
 
 // Campaign routes
-router.get("/campaigns", getCampaigns);
-router.get("/campaign/:id", getCampaign);
-router.post("/campaign", addCampaign);
-router.put('/campaign/:id', updateCampaign);
-router.delete("/campaign/:id", deleteCampaign);
+router.get("/campaigns", validateAccessToken, getCampaigns);
+router.get("/campaign/:id", validateAccessToken, getCampaign);
+router.post("/campaign", validateAccessToken, addCampaign);
+router.put('/campaign/:id', validateAccessToken, updateCampaign);
+router.delete("/campaign/:id", validateAccessToken, deleteCampaign);
 
 export default router;
