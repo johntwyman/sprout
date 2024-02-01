@@ -1,7 +1,7 @@
 
 import axios, { AxiosResponse } from 'axios';
 
-const baseUrl: string = "http://localhost:4000";
+const baseUrl: string = import.meta.env.VITE_API_SERVER_URL;
 
 export const getPledges = async (campaign_name?: string): Promise<AxiosResponse<ApiPledgeData>> => {
   try {
