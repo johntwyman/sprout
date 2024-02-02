@@ -1,17 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { useAuth0 } from '@auth0/auth0-react';
-
 const baseUrl: string = import.meta.env.VITE_API_SERVER_URL;
-
-const getAccessToken = async () => {
-  const { getAccessTokenSilently } = useAuth0();
-  return await getAccessTokenSilently();
-}
-
-const accessToken = await getAccessToken();
-
-axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
 export const getCampaigns = async (): Promise<AxiosResponse<ApiCampaignData>> => {
   try {
