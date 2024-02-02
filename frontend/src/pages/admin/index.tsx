@@ -52,12 +52,6 @@ const Admin = (): React.ReactNode => {
     fetchCampaigns();
   }, []);
 
-  const handleCloseDialog = (): void => setDialogOpen(false);
-  const handleEditCampaign = (campaign: ICampaign): void => {
-    setEditableCampaign(campaign);
-    setDialogOpen(true);
-  };
-
   const fetchCampaigns = (): void => {
     getCampaigns()
       .then(({ data: { campaigns } }: ICampaign[] | any) =>
@@ -73,6 +67,14 @@ const Admin = (): React.ReactNode => {
     };
     handleUpdateCampaign(updatedCampaign);
   };
+
+  const handleCloseDialog = (): void => setDialogOpen(false);
+  const handleEditCampaign = (campaign: ICampaign): void => {
+    setEditableCampaign(campaign);
+    setDialogOpen(true);
+  };
+
+
 
   const handleUpdateCampaign = (campaign: ICampaign): void => {
     updateCampaign(campaign)
