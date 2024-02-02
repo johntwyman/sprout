@@ -2,7 +2,7 @@ import React from 'react';
 
 import useCampaignsApi from '../../api/campaign';
 
-const newCampaign: ICampaign = {
+const newCampaign = {
   _id: "",
   name: "",
   heading: "",
@@ -18,22 +18,32 @@ export const CampaignContext = React.createContext<CampaignContextType>({
   setCampaign: () => {},
 });
 
-export const CampaignProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
-  const [campaign, setCampaign] = React.useState<ICampaign>();
-    const { getCampaign } = useCampaignsApi();
+export const CampaignProvider: React.FC<{
+  children: React.ReactNode;
+  campaignId: string;
+}> = ({ children, campaignId }) => {
+  const [campaign, setCampaign] = React.useState<ICampaign>(newCampaign);
+
+  const { getCampaign } = useCampaignsApi();
 
   React.useEffect(() => {
     const fetchCampaign = async () => {
       try {
-        const response = await getCampaign(_id);
-        setCampaign(response.data.campaign);
+        const response = await getCampaign(campaignId);
+        const {
+          data: { campaign },
+        } = response;
+        if (campaign) {
+          setCampaign(campaign);
+        } else {
+          setCampaign(newCampaign);
+        }
       } catch (error) {
         console.error("Error fetching pledges:", error);
       }
     };
-
     fetchCampaign();
-  }, []);
+  }, [campaignId, getCampaign]);
 
   return (
     <CampaignContext.Provider value={{ campaign, setCampaign }}>

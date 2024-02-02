@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useCSVDownloader } from 'react-papaparse';
-import { useLoaderData } from 'react-router-dom';
 
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
@@ -9,6 +8,7 @@ import Title from '../../components/Title';
 import { usePledgesContext } from './ContextPledges';
 
 type SummaryProps = {
+  campaignName: string;
   initialTarget: number;
   stretchTarget: number;
 };
@@ -45,10 +45,10 @@ const prepareCSVData = (pledges: IPledge[]): CSVData[] =>
     }
   });
 
-const Summary: React.FC<SummaryProps> = ({ initialTarget, stretchTarget }) => {
-  const { pledges } = usePledgesContext();
-  const campaign = useLoaderData() as ICampaign;
-  const total = pledges.reduce((acc, pledge) => acc + pledge.amount, 0);
+const Summary: React.FC<SummaryProps> = ({ campaignName, initialTarget, stretchTarget }) => {
+  const {pledges } = usePledgesContext();
+  const total = pledges.reduce((acc: number, pledge: IPledge) => acc + pledge.amount, 0);
+
   const formatter = new Intl.NumberFormat("en-AU", {
     style: "currency",
     currency: "AUD",
@@ -77,7 +77,7 @@ const Summary: React.FC<SummaryProps> = ({ initialTarget, stretchTarget }) => {
         <Link color="primary" href="#" onClick={preventDefault}>
           <CSVDownloader
             type={Type.Link}
-            filename={`${campaign.name}-pledges`}
+            filename={`${campaignName}-pledges`}
             bom={true}
             data={prepareCSVData(pledges)}
           >

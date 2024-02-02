@@ -7,9 +7,9 @@ const usePledgesApi = () => {
   const { get, del, post, put } = useAxios();
 
   return {
-    getPledges: (campaignName?: string): Promise<AxiosResponse<ApiCampaignData>> => get(`pledges/${campaignName}`),
-    getPledge: (_id: string): Promise<AxiosResponse<ApiCampaignData>> => get(`pledge/${_id}`),
-    addPledge: (pledgeData: IPledge): Promise<AxiosResponse<ApiCampaignData>> => {
+    getPledges: (campaignName?: string): Promise<AxiosResponse<ApiPledgeData>> => get(`pledges/${campaignName}`),
+    getPledge: (_id: string): Promise<AxiosResponse<ApiPledgeData>> => get(`pledge/${_id}`),
+    addPledge: (pledgeData: IPledge): Promise<AxiosResponse<ApiPledgeData>> => {
       const pledge: Omit<IPledge, "_id"> = {
         raw: pledgeData.raw,
         receivedAt: pledgeData.receivedAt,

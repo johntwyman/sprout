@@ -34,7 +34,7 @@ export default function Pledges() {
   const [editablePledge, setEditablePledge] = React.useState<IPledge>(newPledge);
   const { pledges, setPledges } = usePledgesContext();
 
-  const { addPledge, deletePledge, getPledges, updatePledge } = usePledgesApi();
+  const { addPledge, deletePledge, updatePledge } = usePledgesApi();
 
   const handleCloseDialog = (): void => setDialogOpen(false);
   const handleEditPledge = (pledge: IPledge): void => {
@@ -59,7 +59,7 @@ export default function Pledges() {
         if (status !== 201) {
           throw new Error("Error! Campaign not added");
         }
-        setPledges(data.pledges);
+        setPledges(pledges);
       })
       .catch((error) => console.log("Error! Campaign not added"));
   };
@@ -70,7 +70,7 @@ export default function Pledges() {
         if (status !== 200) {
           throw new Error("Error! Campaign not deleted");
         }
-        setPledges(data.pledges);
+        setPledges(pledges);
       })
       .catch((error) => console.log("Error! Campaign not deleted"));
   };
