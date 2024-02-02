@@ -1,7 +1,6 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
 
-import { getPledges } from '../../api/pledge';
+import usePledgesApi from '../../api/pledge';
 
 export const PledgesContext = React.createContext<PledgeContextType>({
   pledges: [],
@@ -10,7 +9,7 @@ export const PledgesContext = React.createContext<PledgeContextType>({
 
 export const PledgesProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
   const [pledges, setPledges] = React.useState<IPledge[]>([]);
-  const campaign = useLoaderData() as ICampaign;
+  const { getPledges } = usePledgesApi();
 
   React.useEffect(() => {
     const fetchPledges = async () => {

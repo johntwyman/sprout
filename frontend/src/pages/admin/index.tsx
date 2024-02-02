@@ -22,7 +22,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
-import { addCampaign, deleteCampaign, getCampaigns, updateCampaign } from '../../api/campaign';
+import useCampaignsApi from '../../api/campaign';
 import Link from '../../components/Link';
 import Title from '../../components/Title';
 import CampaignFormDialog from './CampaignDialog';
@@ -45,6 +45,8 @@ const Admin = (): React.ReactNode => {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [editableCampaign, setEditableCampaign] =
     React.useState<ICampaign>(newCampaign);
+
+  const { addCampaign, getCampaigns, updateCampaign, deleteCampaign } = useCampaignsApi();
 
   React.useEffect(() => {
     fetchCampaigns();
@@ -128,7 +130,13 @@ const Admin = (): React.ReactNode => {
         <Toolbar>
           <ThermostatIcon sx={{ mr: 2 }} />
           <Typography variant="h6" color="inherit" noWrap>
-          <Link color="inherit" style={{ textDecoration: 'none' }} href="/admin">Sprout</Link>
+            <Link
+              color="inherit"
+              style={{ textDecoration: "none" }}
+              href="/admin"
+            >
+              Sprout
+            </Link>
           </Typography>
         </Toolbar>
       </AppBar>

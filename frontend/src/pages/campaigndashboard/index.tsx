@@ -11,17 +11,17 @@ import Paper from '@mui/material/Paper';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-import { getPledges } from '../../api/pledge';
+import usePledgesApi from '../../api/pledge';
 import Link from '../../components/Link';
 import Chart from './Chart';
-import PledgesProvider from './Context';
+import PledgesProvider from './ContextPledges';
 import Pledges from './Pledges';
 import Summary from './Summary';
 
 const CampaignDashboard: React.FC = () => {
   const [pledges, setPledges] = React.useState<IPledge[]>([]);
-
   const campaign = useLoaderData() as ICampaign;
+  const { getPledges } = usePledgesApi();
 
   React.useEffect(() => {
     fetchPledges();

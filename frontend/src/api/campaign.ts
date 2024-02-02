@@ -1,74 +1,39 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
-const baseUrl: string = import.meta.env.VITE_API_SERVER_URL;
+import useAxios from './useAxios';
 
-export const getCampaigns = async (): Promise<AxiosResponse<ApiCampaignData>> => {
-  try {
-    const campaigns: AxiosResponse<ApiCampaignData> = await axios.get(`${baseUrl}/campaigns`);
-    return campaigns;
-  } catch (error) {
-    throw new Error('Error retrieving campaigns');
+const useCampaignsApi = () => {
+  const { get, del, post, put } = useAxios();
+
+  return {
+    getCampaigns: (): Promise<AxiosResponse<ApiCampaignData>> => get(`campaigns`),
+    getCampaign: (_id: string): Promise<AxiosResponse<ApiCampaignData>> => get(`campaign/${_id}`),
+    addCampaign: (campaignData: ICampaign): Promise<AxiosResponse<ApiCampaignData>> => {
+      const campaign: Omit<ICampaign, "_id"> = {
+        name: campaignData.name,
+        heading: campaignData.heading,
+        initial_target: campaignData.initial_target,
+        stretch_target: campaignData.stretch_target,
+        phone_number: campaignData.phone_number,
+        sms_autoresponse: campaignData.sms_autoresponse,
+        active: true,
+      };
+      return post(`campaign`, campaign);
+    },
+    updateCampaign: (campaignData: ICampaign): Promise<AxiosResponse<ApiCampaignData>> => {
+      const payload: Omit<ICampaign, "_id"> = {
+        name: campaignData.name,
+        heading: campaignData.heading,
+        initial_target: campaignData.initial_target,
+        stretch_target: campaignData.stretch_target,
+        phone_number: campaignData.phone_number,
+        sms_autoresponse: campaignData.sms_autoresponse,
+        active: campaignData.active,
+      };
+      return put(`campaign/${campaignData._id}`, payload);
+    },
+    deleteCampaign: (_id: string): Promise<AxiosResponse<ApiCampaignData>> => del(`campaign/${_id}`),
   }
-}
+};
 
-export const getCampaign = async (_id: string): Promise<AxiosResponse<ApiCampaignData>> => {
-  try {
-    const campaign: AxiosResponse<ApiCampaignData> = await axios.get(`${baseUrl}/campaign/${_id}`);
-    return campaign;
-  } catch (error) {
-    throw new Error('Error retrieving campaign');
-  }
-}
-
-export const addCampaign = async (campaignData: ICampaign): Promise<AxiosResponse<ApiCampaignData>> => {
-  try {
-    const campaign: Omit<ICampaign, "_id"> = {
-      name: campaignData.name,
-      heading: campaignData.heading,
-      initial_target: campaignData.initial_target,
-      stretch_target: campaignData.stretch_target,
-      phone_number: campaignData.phone_number,
-      sms_autoresponse: campaignData.sms_autoresponse,
-      active: true,
-    };
-    const saveCampaign: AxiosResponse<ApiCampaignData> = await axios.post(
-      baseUrl + `/campaign`,
-      campaign
-    );
-    return saveCampaign;
-  } catch (error) {
-    throw new Error('Error adding campaign');
-  }
-}
-
-export const updateCampaign = async (campaignData: ICampaign): Promise<AxiosResponse<ApiCampaignData>> => {
-  try {
-    const payload: Omit<ICampaign, "_id"> = {
-      name: campaignData.name,
-      heading: campaignData.heading,
-      initial_target: campaignData.initial_target,
-      stretch_target: campaignData.stretch_target,
-      phone_number: campaignData.phone_number,
-      sms_autoresponse: campaignData.sms_autoresponse,
-      active: campaignData.active,
-    };
-
-    const updatedCampaign: AxiosResponse<ApiCampaignData> = await axios.put(
-      `${baseUrl}/campaign/${campaignData._id}`,
-      payload
-    );
-    return updatedCampaign;
-
-  } catch (error) {
-    throw new Error('Error updating campaign');
-  }
-}
-
-export const deleteCampaign = async (_id: string): Promise<AxiosResponse<ApiCampaignData>> => {
-  try {
-    const deletedCampaign: AxiosResponse<ApiCampaignData> = await axios.delete(`${baseUrl}/campaign/${_id}`);
-    return deletedCampaign;
-  } catch (error) {
-    throw new Error('Error deleting campaign');
-  }
-}
+export default useCampaignsApi;

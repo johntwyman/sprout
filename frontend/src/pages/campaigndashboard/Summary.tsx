@@ -6,7 +6,7 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
 import Title from '../../components/Title';
-import { usePledgesContext } from './Context';
+import { usePledgesContext } from './ContextPledges';
 
 type SummaryProps = {
   initialTarget: number;

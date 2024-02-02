@@ -13,9 +13,9 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Tooltip from '@mui/material/Tooltip';
 
-import { addPledge, deletePledge, getPledges, updatePledge } from '../../api/pledge';
+import usePledgesApi from '../../api/pledge';
 import Title from '../../components/Title';
-import { usePledgesContext } from './Context';
+import { usePledgesContext } from './ContextPledges';
 import PledgeFormDialog from './PledgeDialog';
 
 const newPledge: IPledge = {
@@ -33,6 +33,8 @@ export default function Pledges() {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [editablePledge, setEditablePledge] = React.useState<IPledge>(newPledge);
   const { pledges, setPledges } = usePledgesContext();
+
+  const { addPledge, deletePledge, getPledges, updatePledge } = usePledgesApi();
 
   const handleCloseDialog = (): void => setDialogOpen(false);
   const handleEditPledge = (pledge: IPledge): void => {

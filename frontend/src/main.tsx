@@ -12,13 +12,11 @@ import { internalAgSystemsTheme } from '@australiangreens/ag-internal-components
 import { Auth0Provider } from '@auth0/auth0-react';
 import { ThemeProvider } from '@mui/material';
 
-import { getCampaign } from './api/campaign';
 import { AuthGuard } from './components/AuthGuard';
 import NotFound from './pages/404';
 import Admin from './pages/admin';
 import Campaign from './pages/campaign';
 import CampaignDashboard from './pages/campaigndashboard';
-import ScratchPledge from './pages/scratch/pledge';
 
 // Set up routing
 const router = createBrowserRouter([
@@ -27,22 +25,12 @@ const router = createBrowserRouter([
     element: <AuthGuard component={Admin} />,
   },
   {
-    path: "/scratch/pledge",
-    element: <ScratchPledge />,
-  },
-  {
     path: "/campaign/",
     element: <Campaign />,
   },
   {
     path: "/admin/campaign/:campaignId",
     element: <AuthGuard component={CampaignDashboard} />,
-    loader: async ({ request, params }) => {
-      const campaignId = params.campaignId;
-      const campaign = await getCampaign(campaignId as string);
-      return campaign.data.campaign; // Object will be available via useLoaderData() in the CampaignDashboard component.
-    },
-    errorElement: <NotFound />, // Display the NotFound component if an error occurs while loading the campaign data. This will be displayed instead of the CampaignDashboard component.
   },
   {
     path: "*",
