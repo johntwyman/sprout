@@ -43,7 +43,7 @@ export const CampaignProvider: React.FC<{
       }
     };
     fetchCampaign();
-  }, [campaignId, getCampaign]);
+  }, [campaignId, campaign]);
 
   return (
     <CampaignContext.Provider value={{ campaign, setCampaign }}>
