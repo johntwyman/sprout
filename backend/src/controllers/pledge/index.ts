@@ -4,12 +4,12 @@ import { Types } from 'mongoose';
 import Pledge from '../../models/pledge';
 import { IPledge } from '../../types/pledge';
 
-const getPledges = async (_req: Request, res: Response): Promise<void> => {
+const getPledges = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { campaign_name } = _req.query;
+    const campaignName = req.params.campaignName;
     let pledges: IPledge[] = [];
-    if (campaign_name) {
-      pledges = await Pledge.find({ campaign_name: campaign_name });
+    if (campaignName) {
+      pledges = await Pledge.find({ campaign_name: campaignName });
     } else {
       pledges = await Pledge.find();
     }
