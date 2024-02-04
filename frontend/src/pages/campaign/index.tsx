@@ -4,29 +4,29 @@ import Grid from '@mui/material/Grid';
 
 function Campaign() {
   return (
-    <Grid container style={{ background: "#007239", height: "100vh" }}>
-      <Grid item xs={12} md={9}>
-        <Grid
-          container
-          direction="column"
-          justifyContent="space-evenly"
-          alignItems="flex-start"
-        >
-          <Grid item xs={12} style={{ background: "#000000" }}>
-            <div>Don't be a dick</div>
-          </Grid>
-          <Grid item xs={12} style={{ background: "#444444" }}>
-          <div>Don't be a dick</div>
-          </Grid>
-          <Grid item xs={12} style={{ background: "#f8f8f8" }}>
-          <div>Don't be a dick</div>
-          </Grid>
-        </Grid>
+<Grid container direction="row" xs={12} style={{ height: '100vh', backgroundColor: '#007239' }}> {/* Full viewport height */}
+  <Grid item xs={12} md={9} style={{ height: '100%' }}> {/* Full height within parent grid */}
+    <Grid container direction="column" spacing={2}> {/* Spacing between grid items */}
+      <Grid item xs={12} md={4} style={{ height: '33%', backgroundColor: 'blue'}}> {/* Equal thirds on medium screens and up */}
+        1
       </Grid>
-      <Grid item xs={12} md={3} style={{ background: "#c2c2c2" }}>
-      <div>Don't be a dick</div>
+      <Grid item xs={12} md={4}>
+        2
+      </Grid>
+      <Grid item xs={12} md={4}>
+        3
       </Grid>
     </Grid>
+  </Grid>
+  <Grid item xs={12} md={3}>
+    <ul>
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+    </ul>
+  </Grid>
+</Grid>
+
   );
 }
 
