@@ -1,4 +1,4 @@
-.page-layout {
+.authguard-layout {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,20 +7,28 @@
   width: 100%;
 }
 
-.page-layout__content {
-  flex: 1;
-  flex-basis: auto;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-
-  margin-top: 8rem;
-  max-width: 120rem;
-  width: 100%;
+.campaignpage-title-text {
+  transform: skew(-15deg);
+  -webkit-transform: skew(-15deg);
+  -moz-transform: skew(-15deg);
+  font-size: inherit;
+  font-weight: inherit;
+  display: inline;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background-color: #ffffff;
+  color: #004d25;
+  font-size: 1.7647058824rem;
+  font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.015em;
+  padding: 0 0.2em;
 }
 
-@media only screen and (max-width: 640px) {
-  .page-layout__content {
-    margin-top: 6.4rem;
+@supports (mix-blend-mode: screen) {
+  .campaignpage-title-text {
+    color: #000000;
+    mix-blend-mode: screen;
   }
 }

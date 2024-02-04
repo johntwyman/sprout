@@ -1,32 +1,69 @@
 import * as React from 'react';
 
-import Grid from '@mui/material/Grid';
+import { Box, Grid, List, ListItem, ListItemText } from '@mui/material/';
+
+import CampaignTitle from './CampaignTitle';
+
+const data = [
+  {
+    _id: "23452efw2354",
+    name: "John",
+    amount: 500,
+  },
+  {
+    _id: "gefdlkj34565t",
+    name: "Sue",
+    amount: 300,
+  },
+  {
+    _id: "vlkj34oijjr3g",
+    name: "Tasma",
+    amount: 375,
+  },
+  {
+    _id: "vefoji34t5089u",
+    name: "Bob",
+    amount: 125
+  }
+];
+
+const formatter = new Intl.NumberFormat("en-AU", {
+  style: "currency",
+  currency: "AUD",
+});
 
 function Campaign() {
   return (
-<Grid container direction="row" xs={12} style={{ height: '100vh', backgroundColor: '#007239' }}> {/* Full viewport height */}
-  <Grid item xs={12} md={9} style={{ height: '100%' }}> {/* Full height within parent grid */}
-    <Grid container direction="column" spacing={2}> {/* Spacing between grid items */}
-      <Grid item xs={12} md={4} style={{ height: '33%', backgroundColor: 'blue'}}> {/* Equal thirds on medium screens and up */}
-        1
-      </Grid>
-      <Grid item xs={12} md={4}>
-        2
-      </Grid>
-      <Grid item xs={12} md={4}>
-        3
-      </Grid>
-    </Grid>
-  </Grid>
-  <Grid item xs={12} md={3}>
-    <ul>
-      <li>item 1</li>
-      <li>item 2</li>
-      <li>item 3</li>
-    </ul>
-  </Grid>
-</Grid>
-
+    <Box sx={{ display: 'flex', bgcolor: '#007239', minHeight: '100vh' }}>
+      <Box sx={{ flex: '0 0 70%' }}>
+        {' '}
+        {/* Content (70% width) */}
+        <Grid container spacing={2} sx={{ height: '100%', alignItems: 'stretch' }}>
+          <Grid item xs={12} sx={{ bgcolor: '#00ff00' }}>
+            <CampaignTitle name="Some like it (less) hot" />
+          </Grid>
+          <Grid item xs={12} sx={{ bgcolor: '#ff0000' }}>
+            {/* Content Section 2 */}
+          </Grid>
+          <Grid item xs={12} sx={{ bgcolor: '0000ff' }}>
+            {/* Content Section 3 */}
+          </Grid>
+        </Grid>
+      </Box>
+      <Box sx={{ flex: '0 0 30%' }}>
+        {' '}
+        {/* Sidebar (30% width) */}
+        <Box sx={{ height: '30%', bgcolor: '#0000ff' }}>{/* HowTo Component */}</Box>
+        <Box sx={{ height: '70%', bgcolor: '#ff0000' }}>
+          <List>
+            {data.map((pledge) => (
+              <ListItem key={pledge._id}>
+                <ListItemText primary={`${pledge.name} ${formatter.format(pledge.amount)}`} />
+            </ListItem>
+            ))}
+          </List></Box>
+      </Box>
+    </Box>
   );
 }
 
