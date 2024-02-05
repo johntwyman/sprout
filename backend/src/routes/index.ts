@@ -21,12 +21,15 @@ router.get("/pledges/:campaignName", validateAccessToken, getPledges);
 
 // Campaign routes
 router.get("/campaigns", validateAccessToken, getCampaigns);
-router.get("/campaign/:id", validateAccessToken, getCampaign);
+router.get("/campaign/:identifier", validateAccessToken, getCampaign);
 router.post("/campaign", validateAccessToken, addCampaign);
 router.put('/campaign/:id', validateAccessToken, updateCampaign);
 router.delete("/campaign/:id", validateAccessToken, deleteCampaign);
 
 // Inbound SMS route
 router.post("/sms/:campaign_name", addSMSPledge);
+
+// Public campaign page routes
+router.get("/public/campaign/:name", getCampaign);
 
 export default router;
