@@ -34,15 +34,6 @@
     "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.6.12",
-    "@storybook/addon-interactions": "^7.6.12",
-    "@storybook/addon-links": "^7.6.12",
-    "@storybook/addon-onboarding": "^1.0.11",
-    "@storybook/addon-themes": "^7.6.12",
-    "@storybook/blocks": "^7.6.12",
-    "@storybook/react": "^7.6.12",
-    "@storybook/react-vite": "^7.6.12",
-    "@storybook/test": "^7.6.12",
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
     "@types/luxon": "^3.4.2",
@@ -56,7 +47,6 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-storybook": "^0.6.15",
     "prettier": "3.2.5",
-    "storybook": "^7.6.12",
     "typescript": "^5.0.4",
     "vite": "^5.0.10",
     "vite-plugin-svgr": "^4.2.0",
