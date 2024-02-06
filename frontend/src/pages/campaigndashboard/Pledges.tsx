@@ -15,7 +15,7 @@ import Tooltip from '@mui/material/Tooltip';
 
 import usePledgesApi from '../../api/pledge';
 import Title from '../../components/Title';
-import { usePledgesContext } from './ContextPledges';
+import { usePledgesContext } from '../../context/ContextPledges';
 import PledgeFormDialog from './PledgeDialog';
 
 const newPledge: IPledge = {

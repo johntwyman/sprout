@@ -13,9 +13,9 @@ import Typography from '@mui/material/Typography';
 
 import Link from '../../components/Link';
 import { PageLoader } from '../../components/PageLoader';
+import { useCampaignContext } from '../../context/ContextCampaign';
+import PledgesProvider from '../../context/ContextPledges';
 import Chart from './Chart';
-import { useCampaignContext } from './ContextCampaign';
-import PledgesProvider from './ContextPledges';
 import Pledges from './Pledges';
 import Summary from './Summary';
 

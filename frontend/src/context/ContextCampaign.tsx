@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useCampaignsApi from '../../api/campaign';
+import useCampaignsApi from '../api/campaign';
 
 const newCampaign = {
   _id: "",
@@ -30,16 +30,13 @@ export const CampaignProvider: React.FC<{
     const fetchCampaign = async () => {
       try {
         const response = await getCampaign(campaignId);
-        const {
-          data: { campaign },
-        } = response;
-        if (campaign) {
-          setCampaign(campaign);
+        if (response.data.campaign) {
+          setCampaign(response.data.campaign);
         } else {
           setCampaign(newCampaign);
         }
       } catch (error) {
-        console.error("Error fetching pledges:", error);
+        console.error("Error fetching campaign:", error);
       }
     };
     fetchCampaign();

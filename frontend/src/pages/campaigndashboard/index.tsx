@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import CampaignProvider from './ContextCampaign';
+import CampaignProvider from '../../context/ContextCampaign';
 import Dashboard from './Dashboard';
 
 const CampaignDashboard: React.FC = () => {

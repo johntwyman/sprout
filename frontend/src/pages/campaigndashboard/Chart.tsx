@@ -6,7 +6,7 @@ import { axisClasses, LineChart } from '@mui/x-charts';
 import { ChartsTextStyle } from '@mui/x-charts/ChartsText';
 
 import Title from '../../components/Title';
-import { usePledgesContext } from './ContextPledges';
+import { usePledgesContext } from '../../context/ContextPledges';
 
 // Interface and function to generate chart data from pledges
 interface ChartPledgeData {

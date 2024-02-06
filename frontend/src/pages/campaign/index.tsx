@@ -1,70 +1,36 @@
-import * as React from 'react';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
-import { Box, Grid, List, ListItem, ListItemText } from '@mui/material/';
+import useCampaignsApi from '../../api/campaign';
+import CampaignProvider from '../../context/ContextCampaign';
+import Campaign from './Campaign';
 
-import CampaignTitle from './CampaignTitle';
+const CampaignPage: React.FC = () => {
+  const [campaign, setCampaign] = React.useState<ICampaign | null>(null);
+  const { campaignName } = useParams();
+  const { getPublicCampaign } = useCampaignsApi();
 
-const data = [
-  {
-    _id: "23452efw2354",
-    name: "John",
-    amount: 500,
-  },
-  {
-    _id: "gefdlkj34565t",
-    name: "Sue",
-    amount: 300,
-  },
-  {
-    _id: "vlkj34oijjr3g",
-    name: "Tasma",
-    amount: 375,
-  },
-  {
-    _id: "vefoji34t5089u",
-    name: "Bob",
-    amount: 125
-  }
-];
+  React.useEffect(() => {
+    const fetchCampaign = async () => {
+      try {
+        const response = await getPublicCampaign(campaignName as string);
+        if (response.data.campaign) {
+          setCampaign(response.data.campaign);
+        } else {
+          setCampaign(null);
+        }
+      } catch (error) {
+        console.error("Error fetching campaign:", error);
+      }
+    };
+    fetchCampaign();
+  }, [campaignName, campaign]);
 
-const formatter = new Intl.NumberFormat("en-AU", {
-  style: "currency",
-  currency: "AUD",
-});
-
-function Campaign() {
   return (
-    <Box sx={{ display: 'flex', bgcolor: '#007239', minHeight: '100vh' }}>
-      <Box sx={{ flex: '0 0 70%' }}>
-        {' '}
-        {/* Content (70% width) */}
-        <Grid container spacing={2} sx={{ height: '100%', alignItems: 'stretch' }}>
-          <Grid item xs={12} sx={{ bgcolor: '#00ff00' }}>
-            <CampaignTitle name="Some like it (less) hot" />
-          </Grid>
-          <Grid item xs={12} sx={{ bgcolor: '#ff0000' }}>
-            {/* Content Section 2 */}
-          </Grid>
-          <Grid item xs={12} sx={{ bgcolor: '0000ff' }}>
-            {/* Content Section 3 */}
-          </Grid>
-        </Grid>
-      </Box>
-      <Box sx={{ flex: '0 0 30%' }}>
-        {' '}
-        {/* Sidebar (30% width) */}
-        <Box sx={{ height: '30%', bgcolor: '#0000ff' }}>{/* HowTo Component */}</Box>
-        <Box sx={{ height: '70%', bgcolor: '#ff0000' }}>
-          <List>
-            {data.map((pledge) => (
-              <ListItem key={pledge._id}>
-                <ListItemText primary={`${pledge.name} ${formatter.format(pledge.amount)}`} />
-            </ListItem>
-            ))}
-          </List></Box>
-      </Box>
-    </Box>
+    <CampaignProvider campaignId={campaign?._id ?? ''}>
+      <Campaign />
+    </CampaignProvider>
   );
-}
+};
 
-export default Campaign;
+export default CampaignPage;

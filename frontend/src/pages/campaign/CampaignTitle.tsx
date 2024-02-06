@@ -14,12 +14,12 @@ const CampaignTitle: React.FC<CampaignTitleProps> = ({
 }: CampaignTitleProps) => {
   return (
     <>
-      <Box component="section" sx={{ p: 2 }}>
+      <Box component="section" sx={{ p: 8 }}>
         <GreensLogo style={{ transform: 'scale(5)' }}/>
       </Box>
-      <Typography variant="h1" align="left" className="campaignpage-title-text">
+      <div className="campaignpage-title-text">
         {name}
-      </Typography>
+      </div>
     </>
   );
 };

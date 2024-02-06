@@ -1,6 +1,6 @@
 import React from 'react';
 
-import usePledgesApi from '../../api/pledge';
+import usePledgesApi from '../api/pledge';
 import { useCampaignContext } from './ContextCampaign';
 
 export const PledgesContext = React.createContext<PledgeContextType>({

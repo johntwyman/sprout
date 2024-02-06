@@ -5,7 +5,7 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
 import Title from '../../components/Title';
-import { usePledgesContext } from './ContextPledges';
+import { usePledgesContext } from '../../context/ContextPledges';
 
 type SummaryProps = {
   campaignName: string;

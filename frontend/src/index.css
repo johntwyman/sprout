@@ -8,27 +8,16 @@
 }
 
 .campaignpage-title-text {
-  transform: skew(-15deg);
-  -webkit-transform: skew(-15deg);
-  -moz-transform: skew(-15deg);
-  font-size: inherit;
-  font-weight: inherit;
-  display: inline;
+  transform: skew(-4deg, -4deg);
+  text-transform: uppercase;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
   background-color: #ffffff;
   color: #004d25;
-  font-size: 1.7647058824rem;
+  font-size: 6rem;
   font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.015em;
   padding: 0 0.2em;
-}
-
-@supports (mix-blend-mode: screen) {
-  .campaignpage-title-text {
-    color: #000000;
-    mix-blend-mode: screen;
-  }
 }
