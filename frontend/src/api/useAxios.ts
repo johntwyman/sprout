@@ -2,6 +2,15 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { useAuth0 } from '@auth0/auth0-react';
 
+const isProtectedUrl = (urlString: string) => {
+  try {
+    const url = new URL(urlString);
+    return url.protocol === "http:" || url.protocol === "https:" && url.pathname.startsWith("/admin");
+  } catch (error) {
+    return false; // Invalid URL
+  }
+}
+
 // We wrap Axios methods in a hook, so we can centrally handle adding auth tokens.
 const useAxios = () => {
   const { getAccessTokenSilently } = useAuth0();
@@ -11,7 +20,8 @@ const useAxios = () => {
       config.url = `${import.meta.env.VITE_API_SERVER_URL}/${config.url}`;
     }
 
-    if (config.url.startsWith('/admin') && typeof config.headers.Authorization === 'undefined') {
+    if (isProtectedUrl(config.url) && config.headers.Authorization === undefined) {
+      console.log('Calling protected route');
       config.headers.Authorization = `Bearer ${await getAccessTokenSilently()}`;
     }
     return config;
