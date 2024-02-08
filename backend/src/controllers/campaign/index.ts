@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { Types } from 'mongoose';
 
 import Campaign from '../../models/campaign';
 import { ICampaign } from '../../types/campaign';
@@ -18,12 +17,7 @@ const getCampaign = async (req: Request, res: Response): Promise<void> => {
   try {
     // We will receive either 'id' or 'name' as a parameter.
     // We search the collection using the appropriate method.
-    let campaign: ICampaign | null = null;
-    if (Types.ObjectId.isValid(req.params.id as string)) {
-      campaign = await Campaign.findById(req.params.id);
-    } else {
-      campaign = await Campaign.findOne({ name: req.params.name });
-    }
+    const campaign = await Campaign.findOne({ name: req.params.name });
     if (!campaign) {
       res.status(404).json({ message: "Campaign not found" });
     } else {

@@ -161,7 +161,7 @@ const Admin = (): React.ReactNode => {
                 {visibleRows.map((campaign: ICampaign) => (
                   <TableRow key={campaign._id}>
                     <TableCell>
-                      <Link href={`/admin/campaign/${campaign._id}`}>
+                      <Link href={`/admin/campaign/${campaign.name}`}>
                         {campaign.heading}
                       </Link>
                     </TableCell>

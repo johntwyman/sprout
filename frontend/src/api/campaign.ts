@@ -7,7 +7,7 @@ const useCampaignsApi = () => {
 
   return {
     getCampaigns: (): Promise<AxiosResponse<ApiCampaignData>> => get(`campaigns`),
-    getCampaign: (_id: string): Promise<AxiosResponse<ApiCampaignData>> => get(`campaign/${_id}`),
+    getCampaign: (name: string): Promise<AxiosResponse<ApiCampaignData>> => get(`campaign/${name}`),
     getPublicCampaign: (name: string): Promise<AxiosResponse<ApiCampaignData>> => get(`public/campaign/${name}`),
     addCampaign: (campaignData: ICampaign): Promise<AxiosResponse<ApiCampaignData>> => {
       const campaign: Omit<ICampaign, "_id"> = {

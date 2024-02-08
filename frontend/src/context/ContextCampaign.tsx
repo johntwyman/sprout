@@ -20,8 +20,8 @@ export const CampaignContext = React.createContext<CampaignContextType>({
 
 export const CampaignProvider: React.FC<{
   children: React.ReactNode;
-  campaignId: string;
-}> = ({ children, campaignId }) => {
+  campaignName: string;
+}> = ({ children, campaignName }) => {
   const [campaign, setCampaign] = React.useState<ICampaign>(newCampaign);
 
   const { getCampaign } = useCampaignsApi();
@@ -29,7 +29,7 @@ export const CampaignProvider: React.FC<{
   React.useEffect(() => {
     const fetchCampaign = async () => {
       try {
-        const response = await getCampaign(campaignId);
+        const response = await getCampaign(campaignName);
         if (response.data.campaign) {
           setCampaign(response.data.campaign);
         } else {
@@ -40,7 +40,7 @@ export const CampaignProvider: React.FC<{
       }
     };
     fetchCampaign();
-  }, [campaignId, campaign]);
+  }, [campaignName, campaign]);
 
   return (
     <CampaignContext.Provider value={{ campaign, setCampaign }}>

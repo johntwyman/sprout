@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     element: <Campaign />,
   },
   {
-    path: "/admin/campaign/:campaignId",
+    path: "/admin/campaign/:campaignName",
     element: <AuthGuard component={CampaignDashboard} />,
   },
   {

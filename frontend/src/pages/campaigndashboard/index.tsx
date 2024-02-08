@@ -5,10 +5,10 @@ import CampaignProvider from '../../context/ContextCampaign';
 import Dashboard from './Dashboard';
 
 const CampaignDashboard: React.FC = () => {
-const { campaignId } = useParams();
+const { campaignName } = useParams();
 
   return (
-    <CampaignProvider campaignId={campaignId ?? ''}>
+    <CampaignProvider campaignName={campaignName ?? ''}>
       <Dashboard />
     </CampaignProvider>
   );
