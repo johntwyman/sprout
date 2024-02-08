@@ -11,7 +11,7 @@ const useAxios = () => {
       config.url = `${import.meta.env.VITE_API_SERVER_URL}/${config.url}`;
     }
 
-    if (typeof config.headers.Authorization === 'undefined') {
+    if (config.url.startsWith('/admin') && typeof config.headers.Authorization === 'undefined') {
       config.headers.Authorization = `Bearer ${await getAccessTokenSilently()}`;
     }
     return config;
