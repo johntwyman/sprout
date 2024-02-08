@@ -1,11 +1,13 @@
-import { ICampaign } from "../types/campaign";
-import { model, Schema } from "mongoose";
+import { model, Schema } from 'mongoose';
+
+import { ICampaign } from '../types/campaign';
 
 const campaignSchema: Schema = new Schema(
   {
     name: {
       type: String,
       required: true,
+      unique: true,
     },
     heading: {
       type: String,

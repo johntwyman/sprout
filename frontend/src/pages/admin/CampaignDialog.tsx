@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import Grid from '@mui/material/Grid';
+import Snackbar from '@mui/material/Snackbar';
 import TextField from '@mui/material/TextField';
 
 interface CampaignFormDialogProps {
@@ -22,6 +23,7 @@ const CampaignFormDialog: React.FC<CampaignFormDialogProps> = ({
   handleUpdateCampaign,
 }) => {
   const [formData, setFormData] = useState<ICampaign>(campaign);
+  const [dbError, setDbError] = useState<string | null>(null);
 
   useEffect(() => {
     setFormData(campaign);
@@ -31,13 +33,21 @@ const CampaignFormDialog: React.FC<CampaignFormDialogProps> = ({
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = () => {
-    if (formData._id !== "") {
-      handleUpdateCampaign(formData);
-    } else {
-      handleCreateCampaign(formData);
+  const handleSubmit = async () => {
+    try {
+      if (formData._id !== "") {
+        await handleUpdateCampaign(formData);
+      } else {
+        await handleCreateCampaign(formData);
+      }
+      onClose();
+    } catch (error) {
+      if (error.response && error.response.status === 409) {
+        setDbError("Campaign name already exists");
+      } else {
+        setDbError("An error occurred while creating the campaign");
+      }
     }
-    onClose();
   };
 
   return (
@@ -113,6 +123,7 @@ const CampaignFormDialog: React.FC<CampaignFormDialogProps> = ({
                 {campaign._id ? "Update" : "Create"}
               </Button>
             </Box>
+            {dbError && <Snackbar open={true} autoHideDuration={3000} onClose={() => setDbError(null)} message={dbError} />}
           </Grid>
         </Grid>
       </Box>

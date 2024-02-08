@@ -37,6 +37,12 @@ const getCampaign = async (req: Request, res: Response): Promise<void> => {
 
 const addCampaign = async (req: Request, res: Response): Promise<void> => {
   const body = req.body as Pick<ICampaign, "name" | "heading" | "initial_target" | "stretch_target" | "phone_number" | "sms_autoresponse" | "active">;
+    // Check for existing campaign with the same name
+    const existingCampaign = await Campaign.findOne({ name: body.name });
+    if (existingCampaign) {
+      res.status(409).json({ message: "Campaign with the same name already exists" });
+      return;
+    }
   const campaign: ICampaign = new Campaign({
     name: body.name,
     heading: body.heading,
@@ -56,6 +62,12 @@ const updateCampaign = async (req: Request, res: Response): Promise<void> => {
     params: { id },
     body,
   } = req;
+  // Check for existing campaign with the same name, excluding the current campaign being updated
+  const existingCampaign = await Campaign.findOne({ name: body.name, _id: { $ne: id } });
+  if (existingCampaign) {
+    res.status(409).json({ message: "Campaign with that name already exists" });
+    return;
+  }
   const updatedCampaign: ICampaign | null = await Campaign.findByIdAndUpdate(
     { _id: id },
     body
