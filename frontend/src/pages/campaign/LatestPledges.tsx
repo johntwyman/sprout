@@ -12,7 +12,7 @@ const formatter = new Intl.NumberFormat("en-AU", {
 });
 
 const LatestPledges: React.FC<LatestPledgesProps> = ({ campaignName }) => {
-  const [pledges, setPledges] = React.useState<any[]>([]);
+  const [pledges, setPledges] = React.useState<IPledge[]>([]);
 
   React.useEffect(() => {
     const url = `${import.meta.env.VITE_API_SERVER_URL}/public/campaign/${campaignName}/pledges`;
@@ -40,12 +40,15 @@ const LatestPledges: React.FC<LatestPledgesProps> = ({ campaignName }) => {
     }
   }, [campaignName]);
 
+  // Sort and slice pledges to just show the four latest pledges
+  const latestPledges = pledges.sort((a, b) => new Date(b.receivedAt) - new Date(a.receivedAt)).slice(0, 4);
+
   return (
     <div>
       <h2>Latest Pledges</h2>
       <p>Campaign: {campaignName}</p>
       <List>
-        {pledges.map((pledge) => (
+        {latestPledges.map((pledge) => (
           <ListItem key={pledge._id}>
             <ListItemText primary={pledge.name} secondary={formatter.format(pledge.amount)} />
           </ListItem>
