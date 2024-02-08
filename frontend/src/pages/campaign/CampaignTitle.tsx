@@ -17,9 +17,11 @@ const CampaignTitle: React.FC<CampaignTitleProps> = ({
       <Box component="section" sx={{ p: 8 }}>
         <GreensLogo style={{ transform: 'scale(5)' }}/>
       </Box>
+      <Box sx={{ p: 6 }}>
       <div className="campaignpage-title-text">
         {name}
       </div>
+      </Box>
     </>
   );
 };

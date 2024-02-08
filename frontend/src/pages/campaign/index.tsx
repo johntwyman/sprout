@@ -2,7 +2,6 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import useCampaignsApi from '../../api/campaign';
-import CampaignProvider from '../../context/ContextCampaign';
 import Campaign from './Campaign';
 
 const CampaignPage: React.FC = () => {
@@ -27,9 +26,9 @@ const CampaignPage: React.FC = () => {
   }, [campaignName, campaign]);
 
   return (
-    <CampaignProvider campaignId={campaign?._id ?? ''}>
-      <Campaign />
-    </CampaignProvider>
+    <>
+      { campaign && <Campaign campaign={campaign} /> }
+    </>
   );
 };
 

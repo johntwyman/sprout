@@ -32,21 +32,25 @@ const formatter = new Intl.NumberFormat("en-AU", {
   currency: "AUD",
 });
 
-function Campaign() {
+interface CampaignProps {
+  campaign: ICampaign;
+}
+
+const Campaign: React.FC<CampaignProps> = ({ campaign }) => {
   return (
     <Box sx={{ display: 'flex', bgcolor: '#007239', minHeight: '100vh' }}>
       <Box sx={{ flex: '0 0 70%' }}>
         {' '}
         {/* Content (70% width) */}
         <Grid container spacing={2} sx={{ height: '100%', alignItems: 'stretch' }}>
-          <Grid item xs={12}>
-            <CampaignTitle name="Some like it (less) hot" />
+          <Grid item xs={12} >
+            <CampaignTitle name={campaign.heading} />
           </Grid>
           <Grid item xs={12}>
-            {/* Content Section 2 */}
+          {/* TBC */}
           </Grid>
           <Grid item xs={12}>
-            {/* Content Section 3 */}
+          {/* TBC */}
           </Grid>
         </Grid>
       </Box>

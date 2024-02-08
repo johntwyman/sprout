@@ -15,7 +15,7 @@ import { ThemeProvider } from '@mui/material';
 import { AuthGuard } from './components/AuthGuard';
 import NotFound from './pages/404';
 import Admin from './pages/admin';
-import Campaign from './pages/campaign/Campaign';
+import CampaignPage from './pages/campaign/';
 import CampaignDashboard from './pages/campaigndashboard';
 
 // Set up routing
@@ -25,8 +25,8 @@ const router = createBrowserRouter([
     element: <AuthGuard component={Admin} />,
   },
   {
-    path: "/campaign/:campaignName",
-    element: <Campaign />,
+    path: "/:campaignName",
+    element: <CampaignPage />,
   },
   {
     path: "/admin/campaign/:campaignName",
