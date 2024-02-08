@@ -23,8 +23,8 @@ const data = [
   {
     _id: "vefoji34t5089u",
     name: "Bob",
-    amount: 125
-  }
+    amount: 125,
+  },
 ];
 
 const formatter = new Intl.NumberFormat("en-AU", {
@@ -38,37 +38,47 @@ interface CampaignProps {
 
 const Campaign: React.FC<CampaignProps> = ({ campaign }) => {
   return (
-    <Box sx={{ display: 'flex', bgcolor: '#007239', minHeight: '100vh' }}>
-      <Box sx={{ flex: '0 0 70%' }}>
-        {' '}
+    <Grid
+      container
+      sx={{ display: "flex", bgcolor: "#007239", minHeight: "100vh" }}
+    >
+      <Grid item xs={12} md={8}>
+        {" "}
         {/* Content (70% width) */}
-        <Grid container spacing={2} sx={{ height: '100%', alignItems: 'stretch' }}>
-          <Grid item xs={12} >
+        <Grid
+          container
+          spacing={2}
+          sx={{ height: "100%", alignItems: "stretch" }}
+        >
+          <Grid item xs={12}>
             <CampaignTitle name={campaign.heading} />
           </Grid>
           <Grid item xs={12}>
-          {/* TBC */}
+            {/* TBC */}
           </Grid>
           <Grid item xs={12}>
-          {/* TBC */}
+            {/* TBC */}
           </Grid>
         </Grid>
-      </Box>
-      <Box sx={{ flex: '0 0 30%' }}>
-        {' '}
-        {/* Sidebar (30% width) */}
-        <Box sx={{ height: '30%', bgcolor: '#0000ff' }}>{/* HowTo Component */}</Box>
-        <Box sx={{ height: '70%', bgcolor: '#ff0000' }}>
-          <List>
-            {data.map((pledge) => (
-              <ListItem key={pledge._id}>
-                <ListItemText primary={`${pledge.name} ${formatter.format(pledge.amount)}`} />
-            </ListItem>
-            ))}
-          </List></Box>
-      </Box>
-    </Box>
+      </Grid>
+      <Grid item xs={12} md={4} component="aside">
+        <Grid container direction="column" spacing={2} sx={{ heigh: "100%" }}>
+          <Grid item>{/* HowTo Component */}</Grid>
+          <Grid item>
+            <List>
+              {data.map((pledge) => (
+                <ListItem key={pledge._id}>
+                  <ListItemText
+                    primary={`${pledge.name} ${formatter.format(pledge.amount)}`}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
   );
-}
+};
 
 export default Campaign;
