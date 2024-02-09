@@ -9,7 +9,7 @@ interface PledgeProps {
 
 const Pledge: React.FC<PledgeProps> = ({name, amount}) => {
   return (
-    <Paper sx={{bgcolor: 'white', borderRadius: 4 }}>
+    <Paper sx={{bgcolor: 'white', borderRadius: 2 }}>
       <h3>{name}</h3>
       <p>{amount}</p>
     </Paper>
