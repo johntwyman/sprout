@@ -5,7 +5,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 const isProtectedUrl = (urlString: string) => {
   try {
     const url = new URL(urlString);
-    return url.protocol === "http:" || url.protocol === "https:" && url.pathname.startsWith("/admin");
+    return url.pathname.startsWith("/protected");
   } catch (error) {
     return false; // Invalid URL
   }
@@ -21,7 +21,7 @@ const useAxios = () => {
     }
 
     if (isProtectedUrl(config.url) && config.headers.Authorization === undefined) {
-      console.log('Calling protected route');
+      console.log('Calling protected route:', config.url);
       config.headers.Authorization = `Bearer ${await getAccessTokenSilently()}`;
     }
     return config;
