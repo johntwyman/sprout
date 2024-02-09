@@ -1,6 +1,9 @@
 import React from 'react';
 
 import { List, ListItem, ListItemText } from '@mui/material';
+import Stack from '@mui/material/Stack';
+
+import Pledge from './Pledge';
 
 interface LatestPledgesProps {
   campaignName: string;
@@ -47,13 +50,11 @@ const LatestPledges: React.FC<LatestPledgesProps> = ({ campaignName }) => {
     <div>
       <h2>Latest Pledges</h2>
       <p>Campaign: {campaignName}</p>
-      <List>
+      <Stack spacing={4}>
         {latestPledges.map((pledge) => (
-          <ListItem key={pledge._id}>
-            <ListItemText primary={pledge.name} secondary={formatter.format(pledge.amount)} />
-          </ListItem>
+          <Pledge key={pledge._id} name={pledge.name} amount={pledge.amount} />
         ))}
-      </List>
+      </Stack>
     </div>
   );
 }

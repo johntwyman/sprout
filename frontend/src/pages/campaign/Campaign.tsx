@@ -33,8 +33,8 @@ const Campaign: React.FC<CampaignProps> = ({ campaign }) => {
         </Grid>
       </Grid>
       <Grid item xs={12} md={4} component="aside">
-        <Grid container direction="column" spacing={2} sx={{ heigh: "100%" }}>
-          <Grid item>{/* HowTo Component */}</Grid>
+        <Grid container direction="column" spacing={2} sx={{ height: "100%" }}>
+          <Grid item>How to pledge here</Grid>
           <Grid item>
             <LatestPledges campaignName={campaign.name} />
           </Grid>

@@ -1,7 +1,8 @@
+import '@fontsource/anton';
+
 import React from 'react';
 
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
 import GreensLogo from '../../assets/greenslogo.svg?react';
 
@@ -18,9 +19,11 @@ const CampaignTitle: React.FC<CampaignTitleProps> = ({
         <GreensLogo style={{ transform: 'scale(5)' }}/>
       </Box>
       <Box sx={{ p: 6 }}>
+        <div className="campaignpage-title-container">
       <div className="campaignpage-title-text">
         {name}
       </div>
+        </div>
       </Box>
     </>
   );

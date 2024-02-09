@@ -1,12 +1,19 @@
 import * as React from 'react';
 
-import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 
-const Pledge = (name: string, amount: number) => {
+interface PledgeProps {
+  name: string;
+  amount: number;
+}
+
+const Pledge: React.FC<PledgeProps> = ({name, amount}) => {
   return (
-    <Box>
+    <Paper sx={{bgcolor: 'white', borderRadius: 4 }}>
       <h3>{name}</h3>
       <p>{amount}</p>
-    </Box>
+    </Paper>
   );
 }
+
+export default Pledge;
