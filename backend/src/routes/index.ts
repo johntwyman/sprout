@@ -12,19 +12,19 @@ import { validateAccessToken } from '../middleware/auth0.middleware';
 const router: Router = Router();
 
 // Pledge routes
-router.get("/protected/pledges", validateAccessToken, getPledges);
-router.get("/protected/pledge/:id", validateAccessToken, getPledge);
-router.post("/protected/pledge", validateAccessToken, addPledge);
-router.put("/protected/pledge/:id", validateAccessToken, updatePledge);
-router.delete("/protected/pledge/:id", validateAccessToken, deletePledge);
-router.get("/protected/pledges/:campaignName", validateAccessToken, getPledges);
+router.get("/pledges", validateAccessToken, getPledges);
+router.get("/pledge/:id", validateAccessToken, getPledge);
+router.post("/pledge", validateAccessToken, addPledge);
+router.put("/pledge/:id", validateAccessToken, updatePledge);
+router.delete("/pledge/:id", validateAccessToken, deletePledge);
+router.get("/pledges/:campaignName", validateAccessToken, getPledges);
 
 // Campaign routes
-router.get("/protected/campaigns", validateAccessToken, getCampaigns);
-router.get("/protected/campaign/:campaignName", validateAccessToken, getCampaign);
-router.post("/protected/campaign", validateAccessToken, addCampaign);
-router.put('/protected/campaign/:id', validateAccessToken, updateCampaign);
-router.delete("/protected/campaign/:id", validateAccessToken, deleteCampaign);
+router.get("/campaigns", validateAccessToken, getCampaigns);
+router.get("/campaign/:campaignName", validateAccessToken, getCampaign);
+router.post("/campaign", validateAccessToken, addCampaign);
+router.put('/campaign/:id', validateAccessToken, updateCampaign);
+router.delete("/campaign/:id", validateAccessToken, deleteCampaign);
 
 // Inbound SMS route
 router.post("/sms/:campaign_name", addSMSPledge);

@@ -6,8 +6,8 @@ const useCampaignsApi = () => {
   const { get, del, post, put } = useAxios();
 
   return {
-    getCampaigns: (): Promise<AxiosResponse<ApiCampaignData>> => get(`protected/campaigns`),
-    getCampaign: (name: string): Promise<AxiosResponse<ApiCampaignData>> => get(`protected/campaign/${name}`),
+    getCampaigns: (): Promise<AxiosResponse<ApiCampaignData>> => get(`campaigns`),
+    getCampaign: (name: string): Promise<AxiosResponse<ApiCampaignData>> => get(`campaign/${name}`),
     getPublicCampaign: (name: string): Promise<AxiosResponse<ApiCampaignData>> => get(`public/campaign/${name}`),
     addCampaign: (campaignData: ICampaign): Promise<AxiosResponse<ApiCampaignData>> => {
       const campaign: Omit<ICampaign, "_id"> = {
@@ -19,7 +19,7 @@ const useCampaignsApi = () => {
         sms_autoresponse: campaignData.sms_autoresponse,
         active: true,
       };
-      return post(`protected/campaign`, campaign);
+      return post(`campaign`, campaign);
     },
     updateCampaign: (campaignData: ICampaign): Promise<AxiosResponse<ApiCampaignData>> => {
       const payload: Omit<ICampaign, "_id"> = {
@@ -31,9 +31,9 @@ const useCampaignsApi = () => {
         sms_autoresponse: campaignData.sms_autoresponse,
         active: campaignData.active,
       };
-      return put(`protected/campaign/${campaignData._id}`, payload);
+      return put(`campaign/${campaignData._id}`, payload);
     },
-    deleteCampaign: (_id: string): Promise<AxiosResponse<ApiCampaignData>> => del(`protected/campaign/${_id}`),
+    deleteCampaign: (_id: string): Promise<AxiosResponse<ApiCampaignData>> => del(`campaign/${_id}`),
   }
 };
 

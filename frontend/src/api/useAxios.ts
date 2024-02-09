@@ -5,7 +5,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 const isProtectedUrl = (urlString: string) => {
   try {
     const url = new URL(urlString);
-    return url.pathname.startsWith("/protected");
+    return !url.pathname.startsWith("/public");
   } catch (error) {
     return false; // Invalid URL
   }
