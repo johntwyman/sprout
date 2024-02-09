@@ -8,7 +8,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { internalAgSystemsTheme } from '@australiangreens/ag-internal-components';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { ThemeProvider } from '@mui/material';
 
@@ -17,6 +16,7 @@ import NotFound from './pages/404';
 import Admin from './pages/admin';
 import CampaignPage from './pages/campaign/';
 import CampaignDashboard from './pages/campaigndashboard';
+import theme from './theme';
 
 // Set up routing
 const router = createBrowserRouter([
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-      <ThemeProvider theme={internalAgSystemsTheme}>
+      <ThemeProvider theme={theme}>
         <Auth0Provider
           domain={import.meta.env.VITE_AUTH0_DOMAIN}
           clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
