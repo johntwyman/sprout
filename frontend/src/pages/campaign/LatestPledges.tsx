@@ -1,7 +1,8 @@
 import React from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import { List, ListItem, ListItemText } from '@mui/material';
 import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
 import Pledge from './Pledge';
 
@@ -47,15 +48,27 @@ const LatestPledges: React.FC<LatestPledgesProps> = ({ campaignName }) => {
   const latestPledges = pledges.sort((a, b) => new Date(b.receivedAt) - new Date(a.receivedAt)).slice(0, 4);
 
   return (
-    <div>
-      <h2>Latest Pledges</h2>
-      <p>Campaign: {campaignName}</p>
-      <Stack spacing={4}>
+    <>
+      {/* <Stack spacing={4}>
         {latestPledges.map((pledge) => (
           <Pledge key={pledge._id} name={pledge.name} amount={pledge.amount} />
         ))}
+      </Stack> */}
+      <Stack>
+      <TransitionGroup component="stack" spacing={4}>
+        {latestPledges.map((pledge, index) => (
+          <CSSTransition
+            key={pledge._id}
+            timeout={2000} // Adjust duration as needed
+            classNames="pledge"
+            unmountOnExit
+          >
+            <Pledge key={pledge._id} name={pledge.name} amount={pledge.amount} />
+          </CSSTransition>
+        ))}
+      </TransitionGroup>
       </Stack>
-    </div>
+    </>
   );
 }
 

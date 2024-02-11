@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 
 import GreensLogo from '../../assets/greenslogo.svg?react';
 
-type CampaignTitleProps = {
+interface CampaignTitleProps {
   name: string;
 };
 

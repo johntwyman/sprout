@@ -3,6 +3,7 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 
 import CampaignTitle from './CampaignTitle';
+import HowTo from './HowTo';
 import LatestPledges from './LatestPledges';
 
 interface CampaignProps {
@@ -33,9 +34,9 @@ const Campaign: React.FC<CampaignProps> = ({ campaign }) => {
         </Grid>
       </Grid>
       <Grid item xs={12} md={4} component="aside">
-        <Grid container direction="column" spacing={2} sx={{ height: "100%" }}>
-          <Grid item>How to pledge here</Grid>
-          <Grid item>
+        <Grid container direction="column" spacing={2} sx={{ height: "100%", alignItems: "center" }}>
+          <Grid item sx={{ flexGrow: 1 }}><HowTo phoneNumber={campaign.phone_number}/></Grid>
+          <Grid item sx={{ height: "60%" }}>
             <LatestPledges campaignName={campaign.name} />
           </Grid>
         </Grid>

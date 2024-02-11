@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 
 interface PledgeProps {
   name: string;
@@ -9,9 +10,9 @@ interface PledgeProps {
 
 const Pledge: React.FC<PledgeProps> = ({name, amount}) => {
   return (
-    <Paper sx={{bgcolor: 'white', borderRadius: 2 }}>
-      <h3>{name}</h3>
-      <p>{amount}</p>
+    <Paper sx={{bgcolor: 'white', borderRadius: 2, padding: 2, width: 1/2, margin: 2 }}>
+      <Typography variant="pledgeName">{name}</Typography>
+      <Typography variant="pledgeAmount">${amount}</Typography>
     </Paper>
   );
 }
