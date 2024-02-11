@@ -9,7 +9,7 @@ interface HowToProps {
   phoneNumber: string;
 }
 
-function toInternationalFormat(number) {
+function toInternationalFormat(number: string) {
   // Remove all formatting and non-numeric characters
   const cleanNumber = number.replace(/\D/g, "");
 

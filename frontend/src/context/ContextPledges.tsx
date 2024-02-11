@@ -1,15 +1,16 @@
 import React from 'react';
 
 import usePledgesApi from '../api/pledge';
-import { useCampaignContext } from './ContextCampaign';
 
 export const PledgesContext = React.createContext<PledgeContextType>({
   pledges: [],
   setPledges: () => {},
 });
 
-export const PledgesProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
-  const { campaign } = useCampaignContext();
+export const PledgesProvider: React.FC<{
+  children: React.ReactNode;
+  campaign: ICampaign;
+}> = ({ children, campaign }) => {
   const [pledges, setPledges] = React.useState<IPledge[]>([]);
   const { getPledges } = usePledgesApi();
 

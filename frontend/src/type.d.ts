@@ -18,11 +18,6 @@ type PledgeContextType = {
   setPledges: React.Dispatch<React.SetStateAction<IPledge[]>>,
 }
 
-type CampaignContextType = {
-  campaign: ICampaign,
-  setCampaign: React.Dispatch<React.SetStateAction<ICampaign>>,
-}
-
 interface ICampaign {
   _id: string,
   name: string,

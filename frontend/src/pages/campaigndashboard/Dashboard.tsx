@@ -13,17 +13,19 @@ import Typography from '@mui/material/Typography';
 
 import Link from '../../components/Link';
 import { PageLoader } from '../../components/PageLoader';
-import { useCampaignContext } from '../../context/ContextCampaign';
 import PledgesProvider from '../../context/ContextPledges';
 import Chart from './Chart';
 import Pledges from './Pledges';
 import Summary from './Summary';
 
-const Dashboard: React.FC = () => {
-const { campaign } = useCampaignContext();
+interface DashboardProps {
+  campaign: ICampaign;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ campaign }) => {
 
   return (
-      <PledgesProvider>
+      <PledgesProvider campaign={campaign} >
         <CssBaseline />
         <AppBar position="relative">
           <Toolbar>
