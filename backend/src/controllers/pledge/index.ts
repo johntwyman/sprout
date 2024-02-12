@@ -6,7 +6,7 @@ import { IPledge } from '../../types/pledge';
 
 const getPledges = async (req: Request, res: Response): Promise<void> => {
   try {
-    const campaignName = req.params.campaignName;
+    const campaignName = req.params.name;
     let pledges: IPledge[] = [];
     if (campaignName) {
       pledges = await Pledge.find({ campaign_name: campaignName });

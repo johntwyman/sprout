@@ -25,11 +25,11 @@ const router = createBrowserRouter([
     element: <AuthGuard component={Admin} />,
   },
   {
-    path: "/admin/campaign/:campaignName",
+    path: "/admin/campaign/:name",
     element: <AuthGuard component={CampaignDashboard} />,
   },
   {
-    path: "/:campaignName",
+    path: "/:name",
     element: <CampaignPage />,
   },
   {

@@ -45,7 +45,8 @@ const LatestPledges: React.FC<LatestPledgesProps> = ({ campaignName }) => {
   }, [campaignName]);
 
   // Sort and slice pledges to just show the four latest pledges
-  const latestPledges = pledges.sort((a, b) => new Date(b.receivedAt) - new Date(a.receivedAt)).slice(0, 4);
+  // const latestPledges = pledges.sort((a, b) => new Date(b.receivedAt) - new Date(a.receivedAt)).slice(0, 4);
+  const latestPledges = pledges.sort((a, b) => b.receivedAt > a.receivedAt ? 1 : -1).slice(0, 4);
 
   return (
     <>
@@ -56,7 +57,7 @@ const LatestPledges: React.FC<LatestPledgesProps> = ({ campaignName }) => {
       </Stack> */}
       <Stack>
       <TransitionGroup component="stack" spacing={4}>
-        {latestPledges.map((pledge, index) => (
+        {pledges.map((pledge, index) => (
           <CSSTransition
             key={pledge._id}
             timeout={2000} // Adjust duration as needed

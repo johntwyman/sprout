@@ -8,20 +8,20 @@ import Dashboard from './Dashboard';
 
 const CampaignDashboard: React.FC = () => {
   const [campaign, setCampaign] = React.useState<ICampaign | null>(null);
-  const { campaignName } = useParams();
+  const { name } = useParams();
   const { getCampaign } = useCampaignsApi();
 
   React.useEffect(() => {
     const fetchCampaign = async () => {
       try {
-        const response = await getCampaign(campaignName as string);
+        const response = await getCampaign(name as string);
         setCampaign(response.data.campaign || null); // Set to null if no campaign found
       } catch (error) {
         console.error("Error fetching campaign:", error);
       }
     };
     fetchCampaign();
-  }, [campaignName]); // Only re-run when campaignName or getCampaign change
+  }, [name]);
 
   return (
     <>

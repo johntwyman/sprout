@@ -17,11 +17,11 @@ router.get("/pledge/:id", validateAccessToken, getPledge);
 router.post("/pledge", validateAccessToken, addPledge);
 router.put("/pledge/:id", validateAccessToken, updatePledge);
 router.delete("/pledge/:id", validateAccessToken, deletePledge);
-router.get("/pledges/:campaignName", validateAccessToken, getPledges);
+router.get("/pledges/:name", validateAccessToken, getPledges);
 
 // Campaign routes
 router.get("/campaigns", validateAccessToken, getCampaigns);
-router.get("/campaign/:campaignName", validateAccessToken, getCampaign);
+router.get("/campaign/:name", validateAccessToken, getCampaign);
 router.post("/campaign", validateAccessToken, addCampaign);
 router.put('/campaign/:id', validateAccessToken, updateCampaign);
 router.delete("/campaign/:id", validateAccessToken, deleteCampaign);

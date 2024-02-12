@@ -1,3 +1,4 @@
+import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
@@ -42,8 +43,10 @@ const CampaignFormDialog: React.FC<CampaignFormDialogProps> = ({
       }
       onClose();
     } catch (error) {
-      if (error.response && error.response.status === 409) {
-        setDbError("Campaign name already exists");
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.status === 409) {
+          setDbError("Campaign name already exists");
+        }
       } else {
         setDbError("An error occurred while creating the campaign");
       }

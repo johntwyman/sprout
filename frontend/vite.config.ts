@@ -2,7 +2,7 @@
 /// <reference types="vite/client" />
 
 import { defineConfig } from 'vite';
-import svgrPlugin from 'vite-plugin-svgr';
+import svgr from 'vite-plugin-svgr';
 
 import react from '@vitejs/plugin-react';
 
@@ -16,10 +16,11 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    svgrPlugin({
+    svgr({
       svgrOptions: {
         icon: true,
       },
+      include: "**/*.svg?react",
     }),
   ],
   build: {

@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import SettingsIcon from '@mui/icons-material/Settings';
+import SlideshowIcon from '@mui/icons-material/Slideshow';
 import ThermostatIcon from '@mui/icons-material/Thermostat';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -46,7 +47,8 @@ const Admin = (): React.ReactNode => {
   const [editableCampaign, setEditableCampaign] =
     React.useState<ICampaign>(newCampaign);
 
-  const { addCampaign, getCampaigns, updateCampaign, deleteCampaign } = useCampaignsApi();
+  const { addCampaign, getCampaigns, updateCampaign, deleteCampaign } =
+    useCampaignsApi();
 
   React.useEffect(() => {
     fetchCampaigns();
@@ -73,8 +75,6 @@ const Admin = (): React.ReactNode => {
     setEditableCampaign(campaign);
     setDialogOpen(true);
   };
-
-
 
   const handleUpdateCampaign = (campaign: ICampaign): void => {
     updateCampaign(campaign)
@@ -182,6 +182,15 @@ const Admin = (): React.ReactNode => {
                             <VisibilityOffIcon />
                           </Tooltip>
                         )}
+                      </IconButton>
+                      <IconButton
+                        onClick={() => {
+                          window.open(`/${campaign.name}`, "_blank");
+                        }}
+                      >
+                        <Tooltip title="View" aria-label="View">
+                          <SlideshowIcon />
+                        </Tooltip>
                       </IconButton>
                       <IconButton onClick={() => handleEditCampaign(campaign)}>
                         <Tooltip title="Details" aria-label="Details">
