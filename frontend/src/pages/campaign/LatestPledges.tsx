@@ -59,10 +59,10 @@ const LatestPledges: React.FC<LatestPledgesProps> = ({ campaignName }) => {
         );
         if (index !== -1) {
           if (document.is_deleted) {
-            setPledges((prevPledges) => [
-              ...prevPledges.slice(0, index),
-              ...prevPledges.slice(index + 1),
-            ]);
+            setPledges((prevPledges) => {
+              // Directly return the filtered array to trigger re-render
+              return prevPledges.filter((p) => p._id !== document._id);
+            });
           } else {
             setPledges((prevPledges) => {
               prevPledges[index] = { ...prevPledges[index], ...document };
