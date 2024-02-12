@@ -25,6 +25,15 @@ export const PledgesProvider: React.FC<{
     };
 
     fetchPledges();
+
+    // refresh pledges every minute if the campaign is active
+    if (campaign.active) {
+      const intervalId = setInterval(() => {
+        fetchPledges();
+      }, 60000);
+
+      return () => clearInterval(intervalId);
+    }
   }, [campaign]);
 
   return (
