@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import * as React from 'react';
 
 import Paper from '@mui/material/Paper';
@@ -8,13 +9,28 @@ interface PledgeProps {
   amount: number;
 }
 
-const Pledge: React.FC<PledgeProps> = ({name, amount}) => {
+const Pledge: React.FC<PledgeProps> = ({ name, amount }) => {
   return (
-    <Paper sx={{bgcolor: 'white', borderRadius: 2, padding: 2, width: 1/2, margin: 2 }}>
-      <Typography variant="pledgeName">{name}</Typography>
-      <Typography variant="pledgeAmount">${amount}</Typography>
-    </Paper>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1.5 }}
+    >
+      <Paper
+        sx={{
+          bgcolor: "white",
+          borderRadius: 2,
+          padding: 2,
+          width: 1 / 2,
+          margin: 2,
+        }}
+      >
+        <Typography variant="pledgeName">{name}</Typography>
+        <Typography variant="pledgeAmount">${amount}</Typography>
+      </Paper>
+    </motion.div>
   );
-}
+};
 
 export default Pledge;

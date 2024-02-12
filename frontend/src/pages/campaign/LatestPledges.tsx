@@ -25,6 +25,9 @@ const LatestPledges: React.FC<LatestPledgesProps> = ({ campaignName }) => {
 
     eventSource.onmessage = (event) => {
       const { operation, document } = JSON.parse(event.data);
+      console.log(`Operation: ${operation}`);
+      console.log(`Document: ${JSON.stringify(document)}`);
+      console.log(`Pledges: ${JSON.stringify(pledges)}`);
 
       // Initial event from the backend SSE stream does not conform to the standard SSE data model
       if (operation === undefined) {

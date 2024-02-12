@@ -26,14 +26,11 @@ const HowTo: React.FC<HowToProps> = ({ phoneNumber }) => {
     const qrCode = `SMSTO:${toInternationalFormat(phoneNumber)}: `;
 
   return (
-    <Paper elevation={3} sx={{ bgcolor: 'white', borderRadius: 2, padding: 2, margin: 2}}>
-      <Typography variant="h4">How to Pledge</Typography>
-      <Typography variant="body1">Text {phoneNumber} with your name and pledge amount.</Typography>
+    <Paper elevation={3} sx={{ bgcolor: 'white', borderRadius: 2, padding: 2, margin: 2 }}>
+      <Typography variant="body1">Text your name and pledge amount. Example: "Adam Bandt $100"</Typography>
       <br />
-      <Typography variant="body1">Example: "Adam Bandt $100"</Typography>
-      <br />
-      <Typography variant="body1">You can also scan the QR code below to pledge.</Typography>
-      <Box>
+      <Typography variant="body1">You can also scan the QR code below to pledge.</Typography><br />
+      <Box display="flex" justifyContent="center">
         <QRCode size={256} style={{ height: "auto", maxWidth: "50%", width: "50%" }} value={qrCode} viewBox={`0 0 256 256`}/>
         </Box>
 
