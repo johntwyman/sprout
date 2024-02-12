@@ -1,5 +1,5 @@
+import { produce } from 'immer';
 import React from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -31,32 +31,62 @@ const LatestPledges: React.FC<LatestPledgesProps> = ({ campaignName }) => {
 
       // Initial event from the backend SSE stream does not conform to the standard SSE data model
       if (operation === undefined) {
-        setPledges(JSON.parse(event.data).pledges);
-      } else if (operation === "insert") {
-        setPledges([...pledges, document]);
-      } else if (operation === "update") {
-        setPledges((prevPledges) =>
-          prevPledges.map((pledge) =>
-            pledge._id === document._id ? document : pledge
-          )
+        setPledges(JSON.parse(event.data).pledges.slice(0, 5));
+      }
+
+      if (operation === "insert") {
+        const existingIndex = pledges.findIndex(
+          (pledge) => pledge._id === document._id
         );
-      } else if (operation === "delete") {
-        setPledges(pledges.filter((pledge) => pledge._id !== document._id));
+        setPledges((prevPledges) => {
+          if (existingIndex === -1) {
+            // Insert only if pledge doesn't exist
+            return [...prevPledges.slice(0, 4), document];
+          } else {
+            // Update existing pledge if found
+            prevPledges[existingIndex] = {
+              ...prevPledges[existingIndex],
+              ...document,
+            };
+            return prevPledges;
+          }
+        });
+      }
+
+      if (operation === "update") {
+        const index = pledges.findIndex(
+          (pledge) => pledge._id === document._id
+        );
+        if (index !== -1) {
+          if (document.is_deleted) {
+            setPledges((prevPledges) => [
+              ...prevPledges.slice(0, index),
+              ...prevPledges.slice(index + 1),
+            ]);
+          } else {
+            setPledges((prevPledges) => {
+              prevPledges[index] = { ...prevPledges[index], ...document };
+              return prevPledges;
+            });
+          }
+        }
       }
     };
 
+    // Cleanup function to close the eventSource
     return () => {
       eventSource.close();
     };
   }, [campaignName]);
 
-  // Sort and slice pledges to just show the four latest pledges
+  React.useEffect(() => {
+    console.log(`Pledges: ${JSON.stringify(pledges)}`);
+  }, [pledges]);
 
   return (
     <>
       {pledges
         .sort((a, b) => (b.receivedAt > a.receivedAt ? 1 : -1))
-        .slice(0, 4)
         .map((pledge) => (
           <Pledge key={pledge._id} name={pledge.name} amount={pledge.amount} />
         ))}

@@ -41,7 +41,6 @@ const Campaign: React.FC<CampaignProps> = ({ campaign }) => {
         component="aside"
         sx={{ height: "100%" }}
       >
-          <CampaignTitle name={campaign.phone_number} />
           <HowTo phoneNumber={campaign.phone_number} />
           <LatestPledges campaignName={campaign.name} />
       </Grid>

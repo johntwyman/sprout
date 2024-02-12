@@ -13,13 +13,13 @@ const CampaignPage: React.FC = () => {
     const fetchCampaign = async () => {
       try {
         const response = await getPublicCampaign(name as string);
-        setCampaign(response.data.campaign || null); // Set to null if no campaign found
+        setCampaign(response.data.campaign || null);
       } catch (error) {
         console.error("Error fetching campaign:", error);
       }
     };
     fetchCampaign();
-  }, [name]); // Only re-run when campaignName or getPublicCampaign change
+  }, [name]);
 
   return (
     <>
