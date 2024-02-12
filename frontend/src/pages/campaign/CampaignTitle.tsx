@@ -3,28 +3,18 @@ import '@fontsource/anton';
 import React from 'react';
 
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-
-import GreensLogo from '../../assets/greenslogo.svg?react';
 
 interface CampaignTitleProps {
   name: string;
-};
+}
 
-const CampaignTitle: React.FC<CampaignTitleProps> = ({
-  name,
-}: CampaignTitleProps) => {
+const CampaignTitle: React.FC<CampaignTitleProps> = ({ name }) => {
   return (
-    <>
-      <Box component="section" sx={{ p: 8 }}>
-        <GreensLogo style={{ transform: "scale(5)" }} />
-      </Box>
       <Box sx={{ p: 6 }}>
         <div className="campaignpage-title-container">
           <div className="campaignpage-title-text">{name}</div>
         </div>
       </Box>
-    </>
   );
 };
 
