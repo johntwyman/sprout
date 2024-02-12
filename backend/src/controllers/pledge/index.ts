@@ -79,41 +79,45 @@ const deletePledge = async (req: Request, res: Response): Promise<void> => {
 }
 
 const sendPledges = async (req: Request, res: Response) => {
-    const campaignName = req.params.name;
-    // Set headers for SSE
-    res.writeHead(200, {
-      'Content-Type': 'text/event-stream',
-      'Cache-Control': 'no-cache',
-      'Connection': 'keep-alive',
-    });
+  const campaignName = req.params.name;
+  // Set headers for SSE
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive',
+  });
 
-    // Send all existing pledges for the campaign
-    res.write(`data: ${JSON.stringify({ pledges: await Pledge.find({ campaign_name: campaignName }) })}\n\n`);
+  // Send all existing pledges for the campaign
+  res.write(`data: ${JSON.stringify({ pledges: await Pledge.find({ campaign_name: campaignName }).sort({ receivedAt: -1 }) })}\n\n`);
 
-    // Create the change stream with filtering
-    const changeStream = Pledge.watch(
-      [{ $match: { 'fullDocument.campaign_name': campaignName } }],
-      { fullDocument: 'updateLookup' }
-    );
+  // Create the change stream with filtering
+  const changeStream = Pledge.watch(
+    [{ $match: { 'fullDocument.campaign_name': campaignName } }],
+    {
+      fullDocument: 'updateLookup',
+    }
+  );
 
-    // Handle change events and send updates
-    changeStream.on('change', (change) => {
-      const operation = change.operationType;
-      const document = change.fullDocument;
+  // Handle change events and send updates
+  changeStream.on('change', (change) => {
+    const operation = change.operationType;
+    const document = change.fullDocument;
 
-      // Send update event
-      res.write(`data: ${JSON.stringify({ operation, document })}\n\n`);
-    });
+    // Send update event
+    res.write(`data: ${JSON.stringify({ operation, document })}\n\n`);
+    console.log(`Operation: ${operation}`);
+    console.log(`Document: ${JSON.stringify(document)}`);
+  });
 
-    // Handle errors and close connection
-    res.on('error', (error) => {
-      console.error("Error in SSE:", error);
-      res.end();
-    });
+  // Handle errors and close connection
+  res.on('error', (error) => {
+    console.error("Error in SSE:", error);
+    res.end();
+  });
 
-    req.on('close', () => {
-      changeStream.close();
-    });
+  req.on('close', () => {
+    changeStream.close();
+  });
 }
 
 export { getPledges, getPledge, addPledge, updatePledge, deletePledge, sendPledges };

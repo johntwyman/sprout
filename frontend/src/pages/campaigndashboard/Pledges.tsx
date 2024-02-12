@@ -64,8 +64,12 @@ export default function Pledges() {
       .catch((error) => console.log("Error! Campaign not added"));
   };
 
-  const handleDeletePledge = (id: string): void => {
-    deletePledge(id)
+  const handleDeletePledge = (pledge: IPledge): void => {
+    pledge.is_deleted = true;
+    updatePledge(pledge)
+      .then(() => {
+        return deletePledge(pledge._id);
+      })
       .then(({ status, data }) => {
         if (status !== 200) {
           throw new Error("Error! Campaign not deleted");
@@ -122,7 +126,7 @@ export default function Pledges() {
                         </Tooltip>
                       </IconButton>
                       <IconButton
-                        onClick={() => handleDeletePledge(pledge._id)}
+                        onClick={() => handleDeletePledge(pledge)}
                       >
                         <Tooltip
                           title="Delete pledge"

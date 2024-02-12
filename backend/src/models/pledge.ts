@@ -1,5 +1,6 @@
-import { IPledge } from "../types/pledge";
-import { model, Schema } from "mongoose";
+import { model, Schema } from 'mongoose';
+
+import { IPledge } from '../types/pledge';
 
 const pledgeSchema: Schema = new Schema(
   {
@@ -31,6 +32,12 @@ const pledgeSchema: Schema = new Schema(
     campaign_name: {
       type: String,
       required: true,
+    },
+
+    is_deleted: {
+      type: Boolean,
+      default: false,
+      expires: 0,
     }
   },
   { timestamps: true }

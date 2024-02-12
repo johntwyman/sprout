@@ -7,6 +7,7 @@ interface IPledge {
   amount: number,
   name: string,
   campaign_name: string,
+  is_deleted: boolean,
 }
 
 interface PledgeProps {

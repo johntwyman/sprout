@@ -17,6 +17,7 @@ const usePledgesApi = () => {
         amount: pledgeData.amount,
         name: pledgeData.name,
         campaign_name: pledgeData.campaign_name,
+        is_deleted: false,
       };
       return post(`pledge`, pledge);
     },
@@ -28,6 +29,7 @@ const usePledgesApi = () => {
         amount: pledgeData.amount,
         name: pledgeData.name,
         campaign_name: pledgeData.campaign_name,
+        is_deleted: pledgeData.is_deleted,
       };
       return put(`pledge/${pledgeData._id}`, payload);
     },
