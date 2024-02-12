@@ -59,7 +59,7 @@ export default function Pledges() {
         if (status !== 201) {
           throw new Error("Error! Campaign not added");
         }
-        setPledges(pledges);
+        setPledges(data.pledges);
       })
       .catch((error) => console.log("Error! Campaign not added"));
   };
@@ -70,7 +70,7 @@ export default function Pledges() {
         if (status !== 200) {
           throw new Error("Error! Campaign not deleted");
         }
-        setPledges(pledges);
+        setPledges(data.pledges);
       })
       .catch((error) => console.log("Error! Campaign not deleted"));
   };
