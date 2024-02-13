@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Box, Grid } from '@mui/material';
 
-type ThermometerProps = {
+type ProgressBarProps = {
   campaign: ICampaign;
 };
 
-const Thermometer: React.FC<ThermometerProps> = ({ campaign }) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({ campaign }) => {
   const [pledges, setPledges] = React.useState<IPledge[]>([]);
   const campaignName = campaign.name;
   const initialTarget = campaign.initial_target;
@@ -102,4 +102,4 @@ const Thermometer: React.FC<ThermometerProps> = ({ campaign }) => {
   );
 };
 
-export default Thermometer;
+export default ProgressBar;

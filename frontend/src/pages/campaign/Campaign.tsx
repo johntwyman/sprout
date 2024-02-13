@@ -6,7 +6,7 @@ import GreensLogo from '../../assets/greenslogo.svg?react';
 import CampaignTitle from './CampaignTitle';
 import HowTo from './HowTo';
 import LatestPledges from './LatestPledges';
-import Thermometer from './Thermometer';
+import ProgressBar from './ProgressBar';
 
 interface CampaignProps {
   campaign: ICampaign;
@@ -31,7 +31,7 @@ const Campaign: React.FC<CampaignProps> = ({ campaign }) => {
             <CampaignTitle name={campaign.heading} />
           </Grid>
           <Grid item xs={12}>
-            <Thermometer campaign={ campaign } />
+            <ProgressBar campaign={ campaign } />
           </Grid>
         </Grid>
       </Grid>
