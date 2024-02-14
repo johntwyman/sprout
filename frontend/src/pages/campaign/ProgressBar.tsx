@@ -25,47 +25,27 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ campaign }) => {
 
       // Initial event from the backend SSE stream does not conform to the standard SSE data model
       if (operation === undefined) {
-        setPledges(JSON.parse(event.data).pledges.slice(0, 5));
+        setPledges(JSON.parse(event.data).pledges);
       }
 
+      // Handle operations
       if (operation === "insert") {
-        const existingIndex = pledges.findIndex(
-          (pledge) => pledge._id === document._id
+        setPledges((prevPledges) => [...prevPledges, document]);
+      } else if (operation === "update") {
+        setPledges((prevPledges) =>
+          prevPledges.map((pledge) =>
+            pledge._id === document._id ? document : pledge
+          )
         );
-        setPledges((prevPledges) => {
-          if (existingIndex === -1) {
-            // Insert only if pledge doesn't exist
-            return [...prevPledges.slice(0, 4), document];
-          } else {
-            // Update existing pledge if found
-            prevPledges[existingIndex] = {
-              ...prevPledges[existingIndex],
-              ...document,
-            };
-            return prevPledges;
-          }
-        });
-      }
 
-      if (operation === "update") {
-        const index = pledges.findIndex(
-          (pledge) => pledge._id === document._id
-        );
-        if (index !== -1) {
-          if (document.is_deleted) {
-            setPledges((prevPledges) => {
-              // Directly return the filtered array to trigger re-render
-              return prevPledges.filter((p) => p._id !== document._id);
-            });
-          } else {
-            setPledges((prevPledges) => {
-              prevPledges[index] = { ...prevPledges[index], ...document };
-              return prevPledges;
-            });
-          }
+        if (document.is_deleted) {
+          setPledges((prevPledges) =>
+            prevPledges.filter((pledge) => pledge._id !== document._id)
+          );
         }
       }
     };
+
     // Cleanup function to close the eventSource
     return () => {
       eventSource.close();
@@ -73,7 +53,8 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ campaign }) => {
   }, [campaignName]);
 
   const amountPledged = pledges.reduce((acc, pledge) => acc + pledge.amount, 0);
-  const targetAmount = (amountPledged < initialTarget) ? initialTarget : stretchTarget;
+  const targetAmount =
+    amountPledged < initialTarget ? initialTarget : stretchTarget;
 
   const progressPercentage = (amountPledged / targetAmount) * 100;
   const progressWidth = `${progressPercentage}%`;
@@ -96,7 +77,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ campaign }) => {
           borderRadius: 2,
           height: 80,
           width: progressWidth,
-          margin: '5px 10px',
+          margin: "5px 10px",
         }}
       />
     </Box>

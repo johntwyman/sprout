@@ -31,43 +31,25 @@ const LatestPledges: React.FC<LatestPledgesProps> = ({ campaignName }) => {
         setPledges(JSON.parse(event.data).pledges.slice(0, 5));
       }
 
+      // Handle operations
       if (operation === "insert") {
-        const existingIndex = pledges.findIndex(
-          (pledge) => pledge._id === document._id
+        setPledges((prevPledges) => [...prevPledges, document]);
+      } else if (operation === "update") {
+        setPledges((prevPledges) =>
+          prevPledges.map((pledge) =>
+            pledge._id === document._id ? document : pledge
+          )
         );
-        setPledges((prevPledges) => {
-          if (existingIndex === -1) {
-            // Insert only if pledge doesn't exist
-            return [...prevPledges.slice(0, 4), document];
-          } else {
-            // Update existing pledge if found
-            prevPledges[existingIndex] = {
-              ...prevPledges[existingIndex],
-              ...document,
-            };
-            return prevPledges;
-          }
-        });
-      }
 
-      if (operation === "update") {
-        const index = pledges.findIndex(
-          (pledge) => pledge._id === document._id
-        );
-        if (index !== -1) {
-          if (document.is_deleted) {
-            setPledges((prevPledges) => {
-              // Directly return the filtered array to trigger re-render
-              return prevPledges.filter((p) => p._id !== document._id);
-            });
-          } else {
-            setPledges((prevPledges) => {
-              prevPledges[index] = { ...prevPledges[index], ...document };
-              return prevPledges;
-            });
-          }
+        if (document.is_deleted) {
+          setPledges((prevPledges) =>
+            prevPledges.filter((pledge) => pledge._id !== document._id)
+          );
         }
       }
+
+      // Sort and truncate pledges
+      setPledges((prevPledges) => prevPledges.sort((a, b) => (b.receivedAt > a.receivedAt ? 1 : -1)).slice(0, 5));
     };
 
     // Cleanup function to close the eventSource
