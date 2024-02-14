@@ -73,8 +73,9 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ campaign }) => {
   }, [campaignName]);
 
   const amountPledged = pledges.reduce((acc, pledge) => acc + pledge.amount, 0);
+  const targetAmount = (amountPledged < initialTarget) ? initialTarget : stretchTarget;
 
-  const progressPercentage = (amountPledged / initialTarget) * 100;
+  const progressPercentage = (amountPledged / targetAmount) * 100;
   const progressWidth = `${progressPercentage}%`;
 
   return (

@@ -88,7 +88,7 @@ const sendPledges = async (req: Request, res: Response) => {
   });
 
   // Send all existing pledges for the campaign
-  res.write(`data: ${JSON.stringify({ pledges: await Pledge.find({ campaign_name: campaignName }).sort({ receivedAt: -1 }) })}\n\n`);
+  res.write(`data: ${JSON.stringify({ pledges: await Pledge.find({ campaign_name: campaignName, is_deleted: false }).sort({ receivedAt: -1 }) })}\n\n`);
 
   // Create the change stream with filtering
   const changeStream = Pledge.watch(

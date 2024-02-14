@@ -21,9 +21,9 @@ const Pledge: React.FC<PledgeProps> = ({ name, amount }) => {
         sx={{
           bgcolor: "white",
           borderRadius: 2,
-          padding: 2,
-          width: 1 / 2,
-          margin: 2,
+          padding: "1rem",
+          margin: "1rem",
+          width: "50%",
         }}
       >
         <Typography variant="pledgeName">{name}</Typography>
