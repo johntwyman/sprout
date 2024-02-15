@@ -49,7 +49,11 @@ const LatestPledges: React.FC<LatestPledgesProps> = ({ campaignName }) => {
       }
 
       // Sort and truncate pledges
-      setPledges((prevPledges) => prevPledges.sort((a, b) => (b.receivedAt > a.receivedAt ? 1 : -1)).slice(0, 5));
+      setPledges((prevPledges) =>
+        prevPledges
+          .sort((a, b) => (b.receivedAt > a.receivedAt ? 1 : -1))
+          .slice(0, 5)
+      );
     };
 
     // Cleanup function to close the eventSource

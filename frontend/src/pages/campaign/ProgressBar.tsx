@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 
 type ProgressBarProps = {
   campaign: ICampaign;
@@ -60,27 +60,76 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ campaign }) => {
   const progressWidth = `${progressPercentage}%`;
 
   return (
-    <Box
-      sx={{
-        bgcolor: "#005221",
-        borderRadius: 2,
-        height: 100,
-        width: "80%",
-        display: "flex",
-        alignItems: "center",
-        margin: "10px 40px",
-      }}
-    >
+    <>
+      <Typography
+        variant="h2"
+        sx={{ p: 8, fontWeight: "bold", color: "white", display: "inline" }}
+      >
+        ${amountPledged}
+      </Typography>
+      <Typography
+        variant="h4"
+        sx={{ p: 2, fontWeight: "bold", color: "white", display: "inline" }}
+      >
+        {" "}
+        OF{" "}
+      </Typography>
+      {targetAmount === stretchTarget && (
+        <>
+        <Typography
+          variant="h4"
+          sx={{
+            fontSize: "2.8rem",
+            fontWeight: "bold",
+            color: "white",
+            display: "inline",
+            textDecoration: "line-through",
+          }}
+        >
+          ${initialTarget}
+        </Typography>
+        <Typography
+        variant="h4"
+        sx={{ fontWeight: "bold", color: "white", display: "inline" }}
+      >
+        {" "}
+      </Typography>
+        </>
+      )}
+      <Typography
+        variant="h4"
+        sx={{
+          fontSize: "3rem",
+          fontWeight: "bold",
+          color: "white",
+          display: "inline",
+        }}
+      >
+        ${targetAmount}
+      </Typography>
+
       <Box
         sx={{
-          bgcolor: "#d9d9d9",
+          bgcolor: "#005221",
           borderRadius: 2,
-          height: 80,
-          width: progressWidth,
-          margin: "5px 10px",
+          height: 100,
+          width: "80%",
+          display: "flex",
+          alignItems: "center",
+          margin: "10px 40px",
         }}
-      />
-    </Box>
+      >
+        <Box
+          sx={{
+            bgcolor: "#d9d9d9",
+            borderRadius: 2,
+            height: 80,
+            width: progressWidth,
+            margin: "5px 10px",
+          }}
+        />
+      </Box>
+    </>
   );
 };
 
