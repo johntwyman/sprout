@@ -16,7 +16,7 @@ const Campaign: React.FC<CampaignProps> = ({ campaign }) => {
   return (
     <Grid
       container
-      sx={{ display: "flex", bgcolor: "#007239", minHeight: "100vh" }}
+      sx={{ display: "flex", bgcolor: "#007239", minHeight: "98vh" }}
     >
       <GreensLogo style={{ position: "fixed", top: 60, left: 60, zIndex: 100, transform: "scale(5)" }} />
 

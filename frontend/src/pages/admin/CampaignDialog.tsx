@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-import { Box, Button, Dialog, Grid, Snackbar, TextField } from '@mui/materia';
+import { Box, Button, Dialog, Grid, Snackbar, TextField } from '@mui/material';
 
 interface CampaignFormDialogProps {
   open: boolean;

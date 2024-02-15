@@ -24,8 +24,8 @@ const HowTo: React.FC<HowToProps> = ({ phoneNumber }) => {
   const qrCode = `SMSTO:${toInternationalFormat(phoneNumber)}: `;
 
   return (
-    <>
-      <Typography variant="h2" sx={{color: "white", fontWeight: "bold", mt: 4 }}>
+    <Box sx={{ pl: 2 }}>
+      <Typography variant="h2" sx={{color: "white", fontWeight: "bold", mt: 4, p: 2 }}>
         {phoneNumber}
       </Typography>
       <Paper
@@ -48,10 +48,10 @@ const HowTo: React.FC<HowToProps> = ({ phoneNumber }) => {
           />
         </Box>
       </Paper>
-      <Typography variant="h4" sx={{color: "white", fontWeight: "bold", mt: 2 }}>
+      <Typography variant="h4" sx={{color: "white", fontWeight: "bold", mt: 2, p: 2 }}>
         Text your name and amount<br />eg. "Adam $250"
       </Typography>
-    </>
+    </Box>
   );
 };
 

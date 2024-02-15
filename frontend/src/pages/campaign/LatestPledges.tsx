@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Stack, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 import Pledge from './Pledge';
 
@@ -58,13 +58,13 @@ const LatestPledges: React.FC<LatestPledgesProps> = ({ campaignName }) => {
   }, [pledges]);
 
   return (
-    <>
+    <Box sx={{ pl: 2 }}>
       {pledges
         .sort((a, b) => (b.receivedAt > a.receivedAt ? 1 : -1)).slice(0, 5)
         .map((pledge) => (
           <Pledge key={pledge._id} name={pledge.name} amount={pledge.amount} />
         ))}
-    </>
+    </Box>
   );
 };
 
