@@ -1,8 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Campaign } from '@mui/icons-material';
-
 import useCampaignsApi from '../../api/campaign';
 import Dashboard from './Dashboard';
 

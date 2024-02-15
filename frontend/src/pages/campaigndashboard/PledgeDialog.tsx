@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
+import { Box, Button, Dialog, Grid, TextField } from '@mui/material';
 
 interface PledgeFormDialogProps {
   open: boolean;

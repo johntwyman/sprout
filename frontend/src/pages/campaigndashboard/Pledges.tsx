@@ -3,15 +3,10 @@ import * as React from 'react';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import Tooltip from '@mui/material/Tooltip';
+import {
+    IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow,
+    Tooltip
+} from '@mui/material';
 
 import usePledgesApi from '../../api/pledge';
 import Title from '../../components/Title';
@@ -26,6 +21,7 @@ const newPledge: IPledge = {
   amount: 0,
   name: "",
   campaign_name: "",
+  is_deleted: false,
 }
 export default function Pledges() {
   const [page, setPage] = React.useState(0);

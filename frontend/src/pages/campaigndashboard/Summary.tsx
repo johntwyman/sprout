@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { useCSVDownloader } from 'react-papaparse';
 
-import Link from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
+import { Link, Typography } from '@mui/material';
 
 import Title from '../../components/Title';
 import { usePledgesContext } from '../../context/ContextPledges';

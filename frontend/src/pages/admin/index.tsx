@@ -6,22 +6,10 @@ import SlideshowIcon from '@mui/icons-material/Slideshow';
 import ThermostatIcon from '@mui/icons-material/Thermostat';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import AppBar from '@mui/material/AppBar';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
-import IconButton from '@mui/material/IconButton';
-import Stack from '@mui/material/Stack';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import Toolbar from '@mui/material/Toolbar';
-import Tooltip from '@mui/material/Tooltip';
-import Typography from '@mui/material/Typography';
+import {
+    AppBar, Button, Container, CssBaseline, IconButton, Stack, Table, TableBody, TableCell,
+    TableContainer, TableHead, TablePagination, TableRow, Toolbar, Tooltip, Typography
+} from '@mui/material';
 
 import useCampaignsApi from '../../api/campaign';
 import Link from '../../components/Link';

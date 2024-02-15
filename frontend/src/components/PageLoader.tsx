@@ -2,12 +2,7 @@ import React from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 
 import ThermostatIcon from '@mui/icons-material/Thermostat';
-import AppBar from '@mui/material/AppBar';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
-import Stack from '@mui/material/Stack';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import { AppBar, Container, CssBaseline, Stack, Toolbar, Typography } from '@mui/material';
 
 import Link from './Link';
 

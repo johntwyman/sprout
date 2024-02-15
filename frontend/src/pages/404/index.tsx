@@ -1,10 +1,5 @@
 import ThermostatIcon from '@mui/icons-material/Thermostat';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import { AppBar, Box, Container, CssBaseline, Toolbar, Typography } from '@mui/material';
 
 import Link from '../../components/Link';
 
