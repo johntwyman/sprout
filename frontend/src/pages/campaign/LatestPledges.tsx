@@ -47,13 +47,6 @@ const LatestPledges: React.FC<LatestPledgesProps> = ({ campaignName }) => {
           );
         }
       }
-
-      // Sort and truncate pledges
-      setPledges((prevPledges) =>
-        prevPledges
-          .sort((a, b) => (b.receivedAt > a.receivedAt ? 1 : -1))
-          .slice(0, 5)
-      );
     };
 
     // Cleanup function to close the eventSource
@@ -69,7 +62,7 @@ const LatestPledges: React.FC<LatestPledgesProps> = ({ campaignName }) => {
   return (
     <>
       {pledges
-        .sort((a, b) => (b.receivedAt > a.receivedAt ? 1 : -1))
+        .sort((a, b) => (b.receivedAt > a.receivedAt ? 1 : -1)).slice(0, 5)
         .map((pledge) => (
           <Pledge key={pledge._id} name={pledge.name} amount={pledge.amount} />
         ))}

@@ -18,10 +18,9 @@ const Campaign: React.FC<CampaignProps> = ({ campaign }) => {
       container
       sx={{ display: "flex", bgcolor: "#007239", minHeight: "100vh" }}
     >
-      <Grid item component="section" xs={12} sx={{ p: 8 }}>
-        <GreensLogo style={{ transform: "scale(5)" }} />
-      </Grid>
-      <Grid item xs={12} md={8}>
+      <GreensLogo style={{ position: "fixed", top: 60, left: 60, zIndex: 100, transform: "scale(5)" }} />
+
+      <Grid item xs={12} md={8} sx={{ mt: 8 }}>
         <Grid
           container
           spacing={2}
@@ -40,7 +39,7 @@ const Campaign: React.FC<CampaignProps> = ({ campaign }) => {
         xs={12}
         md={4}
         component="aside"
-        sx={{ height: "100%" }}
+        sx={{ height: "100%", mt: 8 }}
       >
           <HowTo phoneNumber={campaign.phone_number} />
           <LatestPledges campaignName={campaign.name} />
