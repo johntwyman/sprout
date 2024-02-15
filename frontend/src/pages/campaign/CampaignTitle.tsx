@@ -2,7 +2,7 @@ import '@fontsource/anton';
 
 import React from 'react';
 
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 
 interface CampaignTitleProps {
   name: string;

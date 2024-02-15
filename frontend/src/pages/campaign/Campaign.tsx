@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import Grid from '@mui/material/Grid';
+import { Grid } from '@mui/material';
 
 import GreensLogo from '../../assets/greenslogo.svg?react';
 import CampaignTitle from './CampaignTitle';
