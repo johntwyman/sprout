@@ -105,8 +105,6 @@ const sendPledges = async (req: Request, res: Response) => {
 
     // Send update event
     res.write(`data: ${JSON.stringify({ operation, document })}\n\n`);
-    console.log(`Operation: ${operation}`);
-    console.log(`Document: ${JSON.stringify(document)}`);
   });
 
   // Handle errors and close connection

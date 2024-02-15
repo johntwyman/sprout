@@ -21,7 +21,6 @@ const useAxios = () => {
     }
 
     if (isProtectedUrl(config.url) && config.headers.Authorization === undefined) {
-      console.log('Calling protected route:', config.url);
       config.headers.Authorization = `Bearer ${await getAccessTokenSilently()}`;
     }
     return config;

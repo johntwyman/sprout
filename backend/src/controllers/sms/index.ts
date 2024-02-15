@@ -47,12 +47,10 @@ export const addSMSPledge = async (req: Request, res: Response): Promise<void> =
       console.log(`New pledge: ${newPledge._id}`);
       const campaign: ICampaign | null = await Campaign.findOne({ name: req.params.campaign_name });
       if (!campaign) {
-        console.log('NO SUCH CAMPAIGN: ' + req.params.campaign_name);
         res.status(400).json({ message: "Bad request: campaign not found" });
         return;
       }
       if (!campaign.active) {
-        console.log('CAMPAIGN INACTIVE: ' + req.params.campaign_name);
         res.status(400).json({ message: "Bad request: campaign is inactive" });
         return;
       }

@@ -54,7 +54,6 @@ const LatestPledges: React.FC<LatestPledgesProps> = ({ campaignName }) => {
   }, [campaignName]);
 
   React.useEffect(() => {
-    console.log(`Pledges: ${JSON.stringify(pledges)}`);
   }, [pledges]);
 
   return (
